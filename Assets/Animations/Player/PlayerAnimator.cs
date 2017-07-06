@@ -13,12 +13,16 @@ namespace AnimatorParameter
 		protected readonly static int DownHash = -1127399675; public bool Down{ get{ return animator.GetBool(DownHash); } set{ animator.SetBool(DownHash, value); }}
 		protected readonly static int AttackHash = 1080829965; public bool Attack{ get{ return animator.GetBool(AttackHash); } set{ animator.SetBool(AttackHash, value); }}
 		protected readonly static int Attack2Hash = 1680125592; public bool Attack2{ get{ return animator.GetBool(Attack2Hash); } set{ animator.SetBool(Attack2Hash, value); }}
-		protected readonly static int HealthHash = -915003867; public float Health{ get{ return animator.GetFloat(HealthHash); } set{ animator.SetFloat(HealthHash, value); }}
+		protected readonly static int InStateTimerHash = 448632149; public float InStateTimer{ get{ return animator.GetFloat(InStateTimerHash); } set{ animator.SetFloat(InStateTimerHash, value); }}
 		protected readonly static int OnGroundHash = 1602690925; public bool OnGround{ get{ return animator.GetBool(OnGroundHash); } set{ animator.SetBool(OnGroundHash, value); }}
+		protected readonly static int HasDoubleJumpedHash = 1478635177; public bool HasDoubleJumped{ get{ return animator.GetBool(HasDoubleJumpedHash); } set{ animator.SetBool(HasDoubleJumpedHash, value); }}
+		protected readonly static int DashAttackedHash = -711295023; public int DashAttacked{ get{ return animator.GetInteger(DashAttackedHash); } set{ animator.SetInteger(DashAttackedHash, value); }}
+		protected readonly static int HealthHash = -915003867; public float Health{ get{ return animator.GetFloat(HealthHash); } set{ animator.SetFloat(HealthHash, value); }}
 		public static readonly int BaseLayer_Hit_Hit = 1431649142;
 		public static readonly int BaseLayer_Hit_HitDeath = -628763217;
 		public static readonly int BaseLayer_Bind_Slime = -1733274759;
 		public static readonly int BaseLayer_Bind_Slime_Death = 1471739068;
+		public static readonly int BaseLayer_SquatWait_SquatWait = 936402402;
 		public static readonly int BaseLayer_DoubleJump = 905767599;
 		public static readonly int BaseLayer_InAir = -2031572108;
 		public static readonly int BaseLayer_JumpRollingAttack = -1480701593;
@@ -27,7 +31,6 @@ namespace AnimatorParameter
 		public static readonly int BaseLayer_JumpAttack = -1270121204;
 		public static readonly int BaseLayer_Glide = -1812844212;
 		public static readonly int BaseLayer_Idle = 270025622;
-		public static readonly int BaseLayer_SquatWait = -577049724;
 		public static readonly int BaseLayer_FallAttack = 865040603;
 		public static readonly int BaseLayer_Attack3 = 1382299707;
 		public static readonly int BaseLayer_Shoot = 70849234;
@@ -38,6 +41,7 @@ namespace AnimatorParameter
 		public static readonly int BaseLayer_RollingAttack = -81472984;
 		public static readonly int BaseLayer_Attack1 = -1133881065;
 		public static readonly int BaseLayer_Jump = 1804595349;
+		public static readonly int BaseLayer_SquatAttack = 2018459331;
 		public static readonly int States_Invincible = -800127086;
 		public static readonly int States_Blink_Invincible = 672408808;
 		public static readonly int States_Normal = -826140796;

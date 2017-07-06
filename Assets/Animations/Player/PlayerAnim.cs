@@ -7,7 +7,7 @@ namespace AnimatorParameter
 	{
 		public Animator animator;
 
-		protected readonly static int MoveFlgHash = 1441875252; public bool MoveFlg{ get{ return animator.GetBool(MoveFlgHash); } set{ animator.SetBool(MoveFlgHash, value); }}
+		protected readonly static int IsMovingHash = 120489994; public bool IsMoving{ get{ return animator.GetBool(IsMovingHash); } set{ animator.SetBool(IsMovingHash, value); }}
 		protected readonly static int MoveHash = 1326225478; public float Move{ get{ return animator.GetFloat(MoveHash); } set{ animator.SetFloat(MoveHash, value); }}
 		protected readonly static int UpHash = -703542574; public bool Up{ get{ return animator.GetBool(UpHash); } set{ animator.SetBool(UpHash, value); }}
 		protected readonly static int DownHash = -1127399675; public bool Down{ get{ return animator.GetBool(DownHash); } set{ animator.SetBool(DownHash, value); }}
@@ -31,6 +31,7 @@ namespace AnimatorParameter
 		protected readonly static int JumpAttackStrictFlgHash = -1283633244; public bool JumpAttackStrictFlg{ get{ return animator.GetBool(JumpAttackStrictFlgHash); } set{ animator.SetBool(JumpAttackStrictFlgHash, value); }}
 		protected readonly static int DashAttackHash = 1424705300; public int DashAttack{ get{ return animator.GetInteger(DashAttackHash); } set{ animator.SetInteger(DashAttackHash, value); }}
 		protected readonly static int DeathHash = 646380074; public bool Death{ get{ return animator.GetBool(DeathHash); } set{ animator.SetBool(DeathHash, value); }}
+		protected readonly static int InStateTimeHash = 1747671104; public float InStateTime{ get{ return animator.GetFloat(InStateTimeHash); } set{ animator.SetFloat(InStateTimeHash, value); }}
 		public static readonly int Base_Layer_Bind_Slime = -1647310804;
 		public static readonly int Base_Layer_Bind_Slime_Death = 2044045002;
 		public static readonly int Base_Layer_Hit_Hit = -70992185;
@@ -55,6 +56,7 @@ namespace AnimatorParameter
 		public static readonly int Base_Layer_DashAttack = 1674507303;
 		public static readonly int Base_Layer_JumpAttack = -1322572199;
 		public static readonly int Base_Layer_Shoot = 885627960;
+		public static readonly int Base_Layer_RollingWait = 303511187;
 		public static readonly int States_Basic = 35012368;
 		public static readonly int States_Invincible = -800127086;
 		public static readonly int States_Blink_Invincible = 672408808;
