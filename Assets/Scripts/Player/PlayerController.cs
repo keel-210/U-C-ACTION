@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, Health
+public class PlayerController : MonoBehaviour, Health, IDamasable
 {
     public float health { get; set; }
 
@@ -21,15 +21,14 @@ public class PlayerController : MonoBehaviour, Health
     Collider2D HitCollider;
     [SerializeField,Tag]
     string GroundTag;
-
-    PlayerParamater pp;
+    public PlayerParamater PP { get; set; }
     void Start ()
     {
-        pp = GetComponent<PlayerParamater>();
+        PP = GetComponent<PlayerParamater>();
         rb = GetComponent<Rigidbody2D>();
         Debug.Log(rb);
         playeranimator = new AnimatorParameter.PlayerAnimator();
-        playeranimator.animator = pp.PlayerAnimator;
+        playeranimator.animator = PP.PlayerAnimator;
 	}
 	void Update ()
     {
@@ -56,13 +55,17 @@ public class PlayerController : MonoBehaviour, Health
     }
     public void ChangeLayer2Invincible()
     {
-
+        HitCollider.gameObject.layer = 10;
     }
     public void ChangeLayer2Default()
     {
-
+        HitCollider.gameObject.layer = 9;
     }
     public void ChangeColliderSize4Squat(Vector2 size)
+    {
+
+    }
+    public void TakeDamage(int damage)
     {
 
     }

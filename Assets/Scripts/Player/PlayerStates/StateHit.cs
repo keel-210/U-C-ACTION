@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateHit : StateMachineBehaviour
+public class StateHit : PlayerAnimState
 {
     [SerializeField]
     float _AnimateTime;

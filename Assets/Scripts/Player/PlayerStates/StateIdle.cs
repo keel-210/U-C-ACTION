@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateIdle : StateMachineBehaviour
+public class StateIdle : PlayerAnimState
 {
     PlayerController PC;
-
+    Rigidbody2D rb;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PC = animator.transform.parent.GetComponent<PlayerController>();
-        PC.rb.velocity = Vector2.zero;
+        if (rb)
+            rb = animator.transform.parent.GetComponent<Rigidbody2D>();
+        PC.gameObject.layer = 10;
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

@@ -11,15 +11,5 @@ public class PlayerParamater : MonoBehaviour
         get { return _PlayerAnimator; }
         set { _PlayerAnimator = value; }
     }
-    [SerializeField]
-    float Speed, JumpPower, SecondJumpPower, GlidePower;
-	void Start ()
-    {
-		
-	}
-	
-	void Update ()
-    {
-		
-	}
+    public float Speed, JumpPower, SecondJumpPower, GlidePower;
 }

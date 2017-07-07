@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateGlide : StateMachineBehaviour
+public class StateGlide : PlayerAnimState
 {
     PlayerController PC;
-
+    Rigidbody2D rb;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PC = animator.transform.parent.GetComponent<PlayerController>();
+        if (rb)
+            rb = animator.transform.parent.GetComponent<Rigidbody2D>();
+        PC.gameObject.layer = 10;
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

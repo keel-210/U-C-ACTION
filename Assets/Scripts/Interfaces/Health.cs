@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-interface Health
+public interface Health
 {
     float health { get; set; }
 }

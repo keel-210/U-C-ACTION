@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateAirDashAttack : StateMachineBehaviour
+public class StateAirDashAttack : PlayerAnimState
 {
     [SerializeField]
     float _AnimateTime;
@@ -27,10 +27,11 @@ public class StateAirDashAttack : StateMachineBehaviour
     }
     private PlayerController PC;
     TrailRenderer tr;
-    
+    Rigidbody2D rb;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PC = animator.transform.parent.GetComponent<PlayerController>();
+        if (rb)
+            rb = animator.transform.parent.GetComponent<Rigidbody2D>();
         PC.ChangeLayer2Invincible();
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

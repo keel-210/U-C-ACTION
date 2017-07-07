@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateAttack2 : StateMachineBehaviour
+public class StateAttack2 : PlayerAnimState
 {
     [SerializeField]
     float _AnimateTime;
@@ -15,6 +15,7 @@ public class StateAttack2 : StateMachineBehaviour
     private PlayerController PC;
     private float Timer;
     private bool ZeroFlg, NextAttack;
+
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PC = animator.transform.parent.GetComponent<PlayerController>();

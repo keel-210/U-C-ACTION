@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateLanding : StateMachineBehaviour
+public class StateLanding : PlayerAnimState
 {
-
-    
 }

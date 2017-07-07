@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateJumpAttack : StateMachineBehaviour
+public class StateJumpAttack : PlayerAnimState
 {
     [SerializeField]
     float _AnimateTime;
@@ -26,11 +26,11 @@ public class StateJumpAttack : StateMachineBehaviour
         set { _velo = value; }
     }
     private PlayerController PC;
-    private float Timer;
+    Rigidbody2D rb;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PC = animator.transform.parent.GetComponent<PlayerController>();
-        Timer = 0;
+        if (rb)
+            rb = animator.transform.parent.GetComponent<Rigidbody2D>();
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

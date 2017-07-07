@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateAirAttack : StateMachineBehaviour
+public class StateAirAttack : PlayerAnimState
 {
     [SerializeField]
     Vector2 velo;

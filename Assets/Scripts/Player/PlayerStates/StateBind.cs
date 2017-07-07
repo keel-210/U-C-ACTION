@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateBind : StateMachineBehaviour
+public class StateBind : PlayerAnimState
 {
     private PlayerController PC;
     float Timer;

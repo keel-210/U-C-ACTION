@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateDeath : StateMachineBehaviour
+public class StateDeath : PlayerAnimState
 {
     PlayerController PC;
 

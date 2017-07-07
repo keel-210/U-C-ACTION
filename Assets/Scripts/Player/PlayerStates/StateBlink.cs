@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateBlink : StateMachineBehaviour
+public class StateBlink : PlayerAnimState
 {
     PlayerController PC;
     float Timer,BlinkTimer;

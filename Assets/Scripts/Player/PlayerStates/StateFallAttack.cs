@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateFallAttack : StateMachineBehaviour
+public class StateFallAttack : PlayerAnimState
 {
     [SerializeField]
     Vector2 _vec;
@@ -12,9 +12,11 @@ public class StateFallAttack : StateMachineBehaviour
         set { _vec = value; }
     }
     private PlayerController PC;
+    Rigidbody2D rb;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PC = animator.transform.parent.GetComponent<PlayerController>();
+        if (rb)
+            rb = animator.transform.parent.GetComponent<Rigidbody2D>();
         PC.gameObject.layer = 13;
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
