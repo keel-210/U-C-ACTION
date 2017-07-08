@@ -27,7 +27,6 @@ public class StateShoot : PlayerAnimState
     }
 
 
-    private PlayerController PC;
     private float Timer;
     Object bullet;
     float move;

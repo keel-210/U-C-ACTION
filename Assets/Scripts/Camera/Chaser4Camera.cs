@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Chaser4Camera : MonoBehaviour {
     [SerializeField]
-    GameObject _Player;
-    public GameObject Player
+    Transform _Player;
+    public Transform Player
     {
         get { return _Player; }
         set { _Player = value; }
@@ -55,30 +55,9 @@ public class Chaser4Camera : MonoBehaviour {
 
     void Update ()
     {
-        Vector3 NextPos = Vector3.Lerp(transform.position + new Vector3(0, OffsetY, 0), Player.transform.position, ChaserRatio);
-        if(NextPos.x <= Max_x && NextPos.x >= Min_x)
-        {
-            transform.position = new Vector3(NextPos.x,transform.position.y,transform.position.z);
-        }
-        else if (NextPos.x > Max_x)
-        {
-            transform.position = new Vector3(Max_x, transform.position.y, transform.position.z);
-        }
-        else if (NextPos.x < Min_x)
-        {
-            transform.position = new Vector3(Min_x, transform.position.y, transform.position.z);
-        }
-        if (NextPos.y <= Max_y && NextPos.y >= Min_y)
-        {
-            transform.position = new Vector3(transform.position.x, NextPos.y, transform.position.z);
-        }
-        else if (NextPos.y > Max_y)
-        {
-            transform.position = new Vector3(transform.position.x, Max_y, transform.position.z);
-        }
-        else if (NextPos.y < Min_y)
-        {
-            transform.position = new Vector3(transform.position.x, Min_y, transform.position.z);
-        }
+        Vector3 NextPos = Vector3.Lerp(transform.position, Player.position + new Vector3(0, OffsetY, transform.position.z), ChaserRatio);
+        float x = Mathf.Clamp(NextPos.x, Min_x, Max_x);
+        float y = Mathf.Clamp(NextPos.y, Min_y, Max_y);
+        transform.position = new Vector3(x, y, NextPos.z);
     }
 }

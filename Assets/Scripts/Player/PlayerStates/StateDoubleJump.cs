@@ -5,12 +5,8 @@ using UnityEngine;
 
 public class StateDoubleJump : PlayerAnimState
 {
-    private PlayerController PC;
-    Rigidbody2D rb;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (rb)
-            rb = animator.transform.parent.GetComponent<Rigidbody2D>();
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

@@ -22,11 +22,12 @@ public class PlayerController : MonoBehaviour, Health, IDamasable
     [SerializeField,Tag]
     string GroundTag;
     public PlayerParamater PP { get; set; }
+    [SerializeField]
+    PlayerEffectEmitter PEE;
     void Start ()
     {
         PP = GetComponent<PlayerParamater>();
         rb = GetComponent<Rigidbody2D>();
-        Debug.Log(rb);
         playeranimator = new AnimatorParameter.PlayerAnimator();
         playeranimator.animator = PP.PlayerAnimator;
 	}
@@ -68,5 +69,9 @@ public class PlayerController : MonoBehaviour, Health, IDamasable
     public void TakeDamage(int damage)
     {
 
+    }
+    public void EffectEmit(PlayerEffectEnum EffeEnum)
+    {
+        PEE.Emit(EffeEnum);
     }
 }
