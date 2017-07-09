@@ -11,16 +11,16 @@ public class StateFallAttack : PlayerAnimState
         get { return _vec; }
         set { _vec = value; }
     }
-    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PC.gameObject.layer = 13;
     }
-    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PC.rb.velocity += vec;
+        rb.velocity += vec;
         PC.gameObject.layer = 13;
     }
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PC.gameObject.layer = 9;
     }

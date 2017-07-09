@@ -6,13 +6,13 @@ public class StateInvincible : PlayerAnimState
 {
     float Timer;
     float ActivateTime;
-    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
     }
-    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
     }
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
     }
 }

@@ -6,16 +6,16 @@ public class StateAttack2 : PlayerAnimState
 {
     private bool ZeroFlg, NextAttack;
 
-    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         NextAttack = false;
         ZeroFlg = false;
     }
-    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         rb.velocity = Vector2.zero;
     }
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
     }
 }

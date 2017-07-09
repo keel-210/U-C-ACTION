@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, Health, IDamasable
+public class PlayerController : MonoBehaviour, Health, IDamasable, IEffectEmitter
 {
     public float health { get; set; }
 
@@ -14,9 +14,6 @@ public class PlayerController : MonoBehaviour, Health, IDamasable
         set { _AC = value; }
     }
 
-    public Rigidbody2D rb { get; set; }
-    public AnimatorParameter.PlayerAnimator playeranimator { get; private set; }
-
     [SerializeField]
     Collider2D HitCollider;
     [SerializeField,Tag]
@@ -24,22 +21,14 @@ public class PlayerController : MonoBehaviour, Health, IDamasable
     public PlayerParamater PP { get; set; }
     [SerializeField]
     PlayerEffectEmitter PEE;
+
+    AnimatorParameter.PlayerAnimator playeranimator = new AnimatorParameter.PlayerAnimator();
+
     void Start ()
     {
         PP = GetComponent<PlayerParamater>();
-        rb = GetComponent<Rigidbody2D>();
-        playeranimator = new AnimatorParameter.PlayerAnimator();
         playeranimator.animator = PP.PlayerAnimator;
 	}
-	void Update ()
-    {
-        playeranimator.Move = Input.GetAxisRaw("Horizontal");
-        playeranimator.Moving = (Input.GetAxisRaw("Horizontal") != 0);
-        playeranimator.Up = Input.GetAxisRaw("Vertical") > 0;
-        playeranimator.Down = Input.GetAxisRaw("Vertical") < 0;
-        playeranimator.Attack = Input.GetAxisRaw("Fire1") > 0;
-        playeranimator.Attack2 = Input.GetAxisRaw("Fire2") > 0;
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.collider.tag == GroundTag)
@@ -70,8 +59,8 @@ public class PlayerController : MonoBehaviour, Health, IDamasable
     {
 
     }
-    public void EffectEmit(PlayerEffectEnum EffeEnum)
+    public void EffectEmit(int EffectEnum)
     {
-        PEE.Emit(EffeEnum);
+        PEE.Emit((PlayerEffectEnum)EffectEnum);
     }
 }
