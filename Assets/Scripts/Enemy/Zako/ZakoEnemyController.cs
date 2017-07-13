@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZakoEnemyController : MonoBehaviour {
+public class ZakoEnemyController : EnemyController
+{
+    public override void TakeDamage(int damage)
+    {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
 }
+public enum ZakoAttackCollider
+{ }

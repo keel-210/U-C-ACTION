@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackColliders : MonoBehaviour
+public interface IAttackColliders
 {
-    public List<GameObject> Colliders = new List<GameObject>();
+    List<GameObject> Colliders { get; set; }
+    void ColliderEnable(int ACEnum);
+    void ColliderUnable(int ACEnum);
 }
-public enum PlayerAttackColliders
-{AirAttack,DashAttack }

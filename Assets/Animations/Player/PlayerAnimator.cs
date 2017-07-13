@@ -20,8 +20,6 @@ namespace AnimatorParameter
 		protected readonly static int HealthHash = -915003867; public float Health{ get{ return animator.GetFloat(HealthHash); } set{ animator.SetFloat(HealthHash, value); }}
 		public static readonly int BaseLayer_Hit_Hit = 1431649142;
 		public static readonly int BaseLayer_Hit_HitDeath = -628763217;
-		public static readonly int BaseLayer_Bind_Slime = -1733274759;
-		public static readonly int BaseLayer_Bind_Slime_Death = 1471739068;
 		public static readonly int BaseLayer_SquatWait_SquatWait = 936402402;
 		public static readonly int BaseLayer_DoubleJump = 905767599;
 		public static readonly int BaseLayer_InAir = -2031572108;
@@ -42,6 +40,7 @@ namespace AnimatorParameter
 		public static readonly int BaseLayer_Attack1 = -1133881065;
 		public static readonly int BaseLayer_Jump = 1804595349;
 		public static readonly int BaseLayer_SquatAttack = 2018459331;
+		public static readonly int BaseLayer_Landing = 1639993788;
 		public static readonly int States_Invincible = -800127086;
 		public static readonly int States_Blink_Invincible = 672408808;
 		public static readonly int States_Normal = -826140796;

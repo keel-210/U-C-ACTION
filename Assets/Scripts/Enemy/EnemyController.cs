@@ -2,17 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour, IDamasable, Health
+public abstract class EnemyController : MonoBehaviour,IAttackColliders, IDamasable
 {
-    public float health { get; set; }
-    void Start () {
-		
-	}
-	
-	void Update () {
-		
-	}
-    public void TakeDamage(int damage)
+    [SerializeField]
+    protected int _health;
+    public int health { get { return _health; } set { _health = value; } }
+    [SerializeField]
+    protected List<GameObject> _Colliders;
+    public List<GameObject> Colliders
+    {
+        get { return _Colliders; }
+        set { _Colliders = value; }
+    }
+    protected Rigidbody2D rb;
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+    public void ColliderEnable(int ACEnum)
+    {
+        Colliders[ACEnum].SetActive(true);
+    }
+    public void ColliderUnable(int ACEnum)
+    {
+        Colliders[ACEnum].SetActive(false);
+    }
+    public virtual void TakeDamage(int damage)
     {
 
     }

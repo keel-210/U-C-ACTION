@@ -1,4 +1,4 @@
 ﻿public interface IEffectEmitter
 {
-    void EffectEmit(int EffectEnum);
+    void EffectEmit(int EffectName);
 }

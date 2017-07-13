@@ -2,32 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, Health, IDamasable, IEffectEmitter
+public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttackColliders
 {
-    public float health { get; set; }
+    public int health { get; set; }
 
     [SerializeField]
-    private AttackColliders _AC;
-    public AttackColliders AC
+    private List<GameObject> _Colliders;
+    public List<GameObject> Colliders
     {
-        get { return _AC; }
-        set { _AC = value; }
+        get { return _Colliders; }
+        set { _Colliders = value; }
     }
-
     [SerializeField]
-    Collider2D HitCollider;
+    BoxCollider2D HitCollider;
     [SerializeField,Tag]
     string GroundTag;
     public PlayerParamater PP { get; set; }
     [SerializeField]
     PlayerEffectEmitter PEE;
 
+    Vector2 DefaultColliderSize;
     AnimatorParameter.PlayerAnimator playeranimator = new AnimatorParameter.PlayerAnimator();
 
     void Start ()
     {
         PP = GetComponent<PlayerParamater>();
         playeranimator.animator = PP.PlayerAnimator;
+        DefaultColliderSize = HitCollider.size;
 	}
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -51,16 +52,30 @@ public class PlayerController : MonoBehaviour, Health, IDamasable, IEffectEmitte
     {
         HitCollider.gameObject.layer = 9;
     }
-    public void ChangeColliderSize4Squat(Vector2 size)
+    public void ChangeColliderSize(Vector2 size)
     {
-
+        HitCollider.size = size;
+    }
+    public void ChangeColliderSize2Default()
+    {
+        HitCollider.size = DefaultColliderSize;
     }
     public void TakeDamage(int damage)
     {
-
+        health -= damage;
     }
     public void EffectEmit(int EffectEnum)
     {
         PEE.Emit((PlayerEffectEnum)EffectEnum);
     }
+    public void ColliderEnable(int ACEnum)
+    {
+        Colliders[ACEnum].SetActive(true);
+    }
+    public void ColliderUnable(int ACEnum)
+    {
+        Colliders[ACEnum].SetActive(false);
+    }
 }
+public enum PlayerAttackColliders
+{ Attack1,Attack2,Attack3,JumpAttack,RollingAttack,FallAttack,AirAttack, DashAttack }
