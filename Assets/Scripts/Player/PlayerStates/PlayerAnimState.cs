@@ -21,6 +21,7 @@ public abstract class PlayerAnimState : StateMachineBehaviour
     }
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        playeranimator.InStateTimer = 0;
         Enter(animator, stateInfo, layerIndex);
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -31,6 +32,7 @@ public abstract class PlayerAnimState : StateMachineBehaviour
         playeranimator.Down = Input.GetAxisRaw("Vertical") < 0;
         playeranimator.Attack = Input.GetAxisRaw("Fire1") > 0;
         playeranimator.Attack2 = Input.GetAxisRaw("Fire2") > 0;
+        playeranimator.InStateTimer += Time.deltaTime;
         if (playeranimator.Move > 0)
         {
             tra.rotation = Quaternion.Euler(0, 0, 0);
