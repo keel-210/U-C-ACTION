@@ -8,7 +8,7 @@ public class StateFallAttack : PlayerAnimState
     Vector2 velo;
     public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PC.gameObject.layer = 13;
+        PC.ColliderEnable((int)PlayerAttackColliders.FallAttack);
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -16,6 +16,7 @@ public class StateFallAttack : PlayerAnimState
     }
     public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PC.gameObject.layer = 9;
+        PC.ChangeLayer2Default();
+        PC.ColliderUnable((int)PlayerAttackColliders.FallAttack);
     }
 }

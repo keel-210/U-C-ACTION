@@ -12,7 +12,6 @@ public abstract class EnemyAnimState : StateMachineBehaviour
     {
         player = GameObject.Find("Player").transform;
     }
-
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (rb == null)

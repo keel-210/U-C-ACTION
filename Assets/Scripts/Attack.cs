@@ -11,7 +11,11 @@ public class Attack : MonoBehaviour
     Object Effect;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.GetComponent<IDamasable>().TakeDamage(Damage);
+        var d = collision.GetComponent<IDamasable>();
+        if (d != null)
+        {
+            d.TakeDamage(Damage);
+        }
         if (Effect)
         {
             Instantiate(Effect, transform.position, transform.rotation);

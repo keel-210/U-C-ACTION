@@ -29,6 +29,6 @@ public abstract class EnemyController : MonoBehaviour,IAttackColliders, IDamasab
     }
     public virtual void TakeDamage(int damage)
     {
-
+        
     }
 }

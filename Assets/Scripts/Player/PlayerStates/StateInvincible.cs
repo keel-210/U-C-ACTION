@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class StateInvincible : PlayerAnimState
 {
-    float Timer;
-    float ActivateTime;
+    [SerializeField]
+    float InvincibleTime;
     public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
     }

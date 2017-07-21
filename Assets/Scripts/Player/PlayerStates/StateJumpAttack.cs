@@ -5,33 +5,17 @@ using UnityEngine;
 public class StateJumpAttack : PlayerAnimState
 {
     [SerializeField]
-    float _AnimateTime;
-    public float AnimateTime
-    {
-        get { return _AnimateTime; }
-        set { _AnimateTime = value; }
-    }
-    [SerializeField]
-    float _ActivateTime;
-    public float ActivateTime
-    {
-        get { return _ActivateTime; }
-        set { _ActivateTime = value; }
-    }
-    [SerializeField]
-    Vector2 _velo;
-    public Vector2 velo
-    {
-        get { return _velo; }
-        set { _velo = value; }
-    }
+    Vector2 velo;
     public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        PC.ColliderEnable((int)PlayerAttackColliders.JumpAttack);
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        rb.velocity = velo;
     }
     public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        PC.ColliderUnable((int)PlayerAttackColliders.JumpAttack);
     }
 }

@@ -6,7 +6,7 @@ public class ZakoEnemyController : EnemyController
 {
     public override void TakeDamage(int damage)
     {
-
+        health -= damage;
     }
 }
 public enum ZakoAttackCollider

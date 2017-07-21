@@ -7,7 +7,6 @@ public abstract class PlayerAnimState : StateMachineBehaviour
     protected Rigidbody2D rb;
     protected PlayerController PC;
     protected AnimatorParameter.PlayerAnimator playeranimator = new AnimatorParameter.PlayerAnimator();
-    protected float Direction;
 
     Transform tra;
     private void Awake()
@@ -18,6 +17,7 @@ public abstract class PlayerAnimState : StateMachineBehaviour
         tra = obj.transform;
         PlayerParamater PP = obj.GetComponent<PlayerParamater>();
         playeranimator.animator = PP.PlayerAnimator;
+        playeranimator.Direction = 1;
     }
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -28,20 +28,19 @@ public abstract class PlayerAnimState : StateMachineBehaviour
     {
         playeranimator.Move = Input.GetAxisRaw("Horizontal");
         playeranimator.Moving = (Input.GetAxisRaw("Horizontal") != 0);
-        playeranimator.Up = Input.GetAxisRaw("Vertical") > 0;
-        playeranimator.Down = Input.GetAxisRaw("Vertical") < 0;
+        playeranimator.Up = Input.GetAxisRaw("Vertical") == 1;
+        playeranimator.Down = Input.GetAxisRaw("Vertical") == -1;
         playeranimator.Attack = Input.GetAxisRaw("Fire1") > 0;
         playeranimator.Attack2 = Input.GetAxisRaw("Fire2") > 0;
+        playeranimator.Health = PC.health;
         playeranimator.InStateTimer += Time.deltaTime;
-        if (playeranimator.Move > 0)
+        if(playeranimator.Moving)
         {
-            tra.rotation = Quaternion.Euler(0, 0, 0);
-            Direction = 1;
+            playeranimator.Direction = playeranimator.Move;
         }
-        else if(playeranimator.Move < 0)
+        if (rb.velocity.y < 0 && (stateInfo.IsName("InAir")|| stateInfo.IsName("FallAttack") || stateInfo.IsName("Rolling") || stateInfo.IsName("RollingAttack") || stateInfo.IsName("JumpRollingAttack")))
         {
-            tra.rotation = Quaternion.Euler(0, 180, 0);
-            Direction = -1;
+            PC.ChangeLayer2Default();
         }
         Execute(animator, stateInfo, layerIndex);
     }
@@ -52,4 +51,8 @@ public abstract class PlayerAnimState : StateMachineBehaviour
     public virtual void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
     public virtual void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
     public virtual void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
+    public void DirectionFix()
+    {
+        tra.rotation = Quaternion.Euler(0, 90 * (playeranimator.Direction - 1), 0);
+    }
 }

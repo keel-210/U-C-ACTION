@@ -12,4 +12,5 @@ public class PlayerParamater : MonoBehaviour
         set { _PlayerAnimator = value; }
     }
     public float Speed, JumpPower, SecondJumpPower, GlidePower;
+    public Object Bullet;
 }

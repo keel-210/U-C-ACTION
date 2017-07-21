@@ -9,6 +9,7 @@ namespace AnimatorParameter
 
 		protected readonly static int MovingHash = 949806512; public bool Moving{ get{ return animator.GetBool(MovingHash); } set{ animator.SetBool(MovingHash, value); }}
 		protected readonly static int MoveHash = 1326225478; public float Move{ get{ return animator.GetFloat(MoveHash); } set{ animator.SetFloat(MoveHash, value); }}
+		protected readonly static int DirectionHash = -1128574192; public float Direction{ get{ return animator.GetFloat(DirectionHash); } set{ animator.SetFloat(DirectionHash, value); }}
 		protected readonly static int UpHash = -703542574; public bool Up{ get{ return animator.GetBool(UpHash); } set{ animator.SetBool(UpHash, value); }}
 		protected readonly static int DownHash = -1127399675; public bool Down{ get{ return animator.GetBool(DownHash); } set{ animator.SetBool(DownHash, value); }}
 		protected readonly static int AttackHash = 1080829965; public bool Attack{ get{ return animator.GetBool(AttackHash); } set{ animator.SetBool(AttackHash, value); }}
@@ -17,7 +18,7 @@ namespace AnimatorParameter
 		protected readonly static int OnGroundHash = 1602690925; public bool OnGround{ get{ return animator.GetBool(OnGroundHash); } set{ animator.SetBool(OnGroundHash, value); }}
 		protected readonly static int HasDoubleJumpedHash = 1478635177; public bool HasDoubleJumped{ get{ return animator.GetBool(HasDoubleJumpedHash); } set{ animator.SetBool(HasDoubleJumpedHash, value); }}
 		protected readonly static int DashAttackedHash = -711295023; public int DashAttacked{ get{ return animator.GetInteger(DashAttackedHash); } set{ animator.SetInteger(DashAttackedHash, value); }}
-		protected readonly static int HealthHash = -915003867; public float Health{ get{ return animator.GetFloat(HealthHash); } set{ animator.SetFloat(HealthHash, value); }}
+		protected readonly static int HealthHash = -915003867; public int Health{ get{ return animator.GetInteger(HealthHash); } set{ animator.SetInteger(HealthHash, value); }}
 		public static readonly int BaseLayer_Hit_Hit = 1431649142;
 		public static readonly int BaseLayer_Hit_HitDeath = -628763217;
 		public static readonly int BaseLayer_SquatWait_SquatWait = 936402402;

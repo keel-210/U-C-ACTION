@@ -6,11 +6,10 @@ public class StateIdle : PlayerAnimState
 {
     public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PC.gameObject.layer = 10;
+        base.DirectionFix();
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        base.Execute(animator, stateInfo, layerIndex);
     }
     public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
