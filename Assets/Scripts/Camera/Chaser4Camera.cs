@@ -53,7 +53,7 @@ public class Chaser4Camera : MonoBehaviour {
         set { _OffsetY = value; }
     }
 
-    void Update ()
+    void FixedUpdate ()
     {
         Vector3 NextPos = Vector3.Lerp(transform.position, Player.position + new Vector3(0, OffsetY, transform.position.z), ChaserRatio);
         float x = Mathf.Clamp(NextPos.x, Min_x, Max_x);

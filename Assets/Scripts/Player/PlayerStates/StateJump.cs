@@ -11,6 +11,7 @@ public class StateJump : PlayerAnimState
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        rb.velocity = new Vector2(rb.velocity.x, PC.PP.JumpPower);
     }
     public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

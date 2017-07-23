@@ -12,6 +12,13 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
         set { _health = value; }
     }
     [SerializeField]
+    private int _magic;
+    public int magic
+    {
+        get { return _magic; }
+        set { _magic = value; }
+    }
+    [SerializeField]
     private List<GameObject> _Colliders;
     public List<GameObject> Colliders
     {
@@ -40,6 +47,7 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
         {
             playeranimator.OnGround = true;
             playeranimator.HasDoubleJumped = false;
+            playeranimator.DashAttacked = 0;
         }
     }
     private void OnCollisionStay2D(Collision2D collision)
@@ -56,16 +64,16 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
         {
             playeranimator.OnGround = false;
             playeranimator.HasDoubleJumped = false;
-            ChangeLayer(gameObject, 16);
+            ChangeLayer2Squat();
         }
     }
     public void ChangeLayer2Invincible()
     {
-        ChangeLayer(HitCollider.gameObject, 10);
+        ChangeLayer(HitCollider.gameObject, 9);
     }
     public void ChangeLayer2Default()
     {
-        ChangeLayer(HitCollider.gameObject, 9);
+        ChangeLayer(HitCollider.gameObject, 8);
         ChangeLayer(gameObject, 15);
     }
     public void ChangeLayer2Squat()

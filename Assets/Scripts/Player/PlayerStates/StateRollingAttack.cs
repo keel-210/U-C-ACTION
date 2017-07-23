@@ -20,5 +20,6 @@ public class StateRollingAttack : PlayerAnimState
     {
         PC.ChangeLayer2Default();
         PC.ColliderUnable((int)PlayerAttackColliders.RollingAttack);
+        rb.velocity = Vector2.zero;
     }
 }

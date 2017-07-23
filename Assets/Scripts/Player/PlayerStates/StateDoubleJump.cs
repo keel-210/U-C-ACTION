@@ -7,6 +7,7 @@ public class StateDoubleJump : PlayerAnimState
 {
     public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        playeranimator.HasDoubleJumped = true;
         rb.velocity = new Vector2(rb.velocity.x, rb.gravityScale * PC.PP.SecondJumpPower);
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

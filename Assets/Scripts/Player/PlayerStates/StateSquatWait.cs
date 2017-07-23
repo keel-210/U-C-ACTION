@@ -8,6 +8,7 @@ public class StateSquatWait : PlayerAnimState
     {
         PC.ChangeColliderSize(new Vector2(3, 3));
         PC.ChangeLayer2Squat();
+        rb.velocity = Vector2.zero;
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

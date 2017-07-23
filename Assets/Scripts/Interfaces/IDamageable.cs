@@ -1,5 +1,4 @@
-﻿public interface IDamasable
+﻿public interface IDamasable : Health
 {
-    int health { get; set; }
     void TakeDamage(int Damage);
 }

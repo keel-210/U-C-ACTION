@@ -8,6 +8,10 @@ public class ZakoEnemyController : EnemyController
     {
         health -= damage;
     }
+    public override void Hit(Vector2 velo)
+    {
+        rb.velocity = velo;
+    }
 }
 public enum ZakoAttackCollider
 { }
