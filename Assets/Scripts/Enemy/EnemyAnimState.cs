@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class EnemyAnimState : StateMachineBehaviour
 {
+    protected EnemyController EC;
     protected Rigidbody2D rb;
     protected Transform tra;
     protected Transform player;
@@ -18,13 +19,17 @@ public abstract class EnemyAnimState : StateMachineBehaviour
         {
             rb = animator.GetComponent<Rigidbody2D>();
             tra = animator.GetComponent<Transform>();
+            EC = animator.GetComponent<EnemyController>();
         }
+        animator.SetFloat("InStateTimer", 0);
         Enter(animator, stateInfo, layerIndex);
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetFloat("PosDifX", tra.position.x - player.position.x);
         animator.SetFloat("PosDifY", tra.position.y - player.position.y);
+        float timer = animator.GetFloat("InStateTimer");
+        animator.SetFloat("InStateTimer", timer + Time.deltaTime);
         Execute(animator, stateInfo, layerIndex);
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

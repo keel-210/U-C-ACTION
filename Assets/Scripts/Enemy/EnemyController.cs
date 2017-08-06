@@ -8,13 +8,6 @@ public abstract class EnemyController : MonoBehaviour,IAttackColliders, IDamasab
     protected int _health;
     public int health { get { return _health; } set { _health = value; } }
     [SerializeField]
-    private Vector2 _HitVelo;
-    public Vector2 HitVelo
-    {
-        get { return _HitVelo; }
-        set { _HitVelo = value; }
-    }
-    [SerializeField]
     protected List<GameObject> _Colliders;
     public List<GameObject> Colliders
     {
@@ -27,12 +20,12 @@ public abstract class EnemyController : MonoBehaviour,IAttackColliders, IDamasab
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    public void Direction20()
+    public void Direction2Zero()
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);
         Direction = 1;
     }
-    public void Direction2180()
+    public void Direction2Opposite()
     {
         transform.rotation = Quaternion.Euler(0, 180, 0);
         Direction = -1;
