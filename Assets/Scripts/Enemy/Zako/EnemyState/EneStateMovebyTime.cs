@@ -22,6 +22,14 @@ public class EneStateMovebyTime : EnemyAnimState
             dif = new Vector2(dif.x, 0);
         }
         dif = dif.normalized;
+        if (dif.x > 0)
+        {
+            EC.Direction2Zero();
+        }
+        else
+        {
+            EC.Direction2Opposite();
+        }
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

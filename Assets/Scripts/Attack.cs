@@ -13,12 +13,12 @@ public class Attack : MonoBehaviour
     Object Effect;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var d = collision.GetComponent<IDamasable>();
+        var d = collision.GetComponentInParent<IDamasable>();
         if (d != null)
         {
             d.TakeDamage(Damage);
         }
-        var h = collision.GetComponent<IHitable>();
+        var h = collision.GetComponentInParent<IHitable>();
         if(h != null)
         {
             float dir;

@@ -26,8 +26,13 @@ public abstract class EnemyAnimState : StateMachineBehaviour
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animator.SetInteger("Health", EC.health);
         animator.SetFloat("PosDifX", tra.position.x - player.position.x);
         animator.SetFloat("PosDifY", tra.position.y - player.position.y);
+        animator.SetFloat("AbsDifX", Mathf.Abs(animator.GetFloat("PosDifX")));
+        animator.SetFloat("AbsDifY", Mathf.Abs(animator.GetFloat("PosDifY")));
+        animator.SetBool("Hit", EC.IsHit);
+        animator.SetBool("OnGround", EC.OnGround);
         float timer = animator.GetFloat("InStateTimer");
         animator.SetFloat("InStateTimer", timer + Time.deltaTime);
         Execute(animator, stateInfo, layerIndex);

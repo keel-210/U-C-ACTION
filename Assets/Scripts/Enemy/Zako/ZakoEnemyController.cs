@@ -10,8 +10,7 @@ public class ZakoEnemyController : EnemyController
     }
     public override void Hit(Vector2 velo)
     {
-        rb.velocity = velo;
+        IsHit = true;
+        rb.velocity = new Vector2(velo.x * Direction, velo.y);
     }
 }
-public enum ZakoAttackCollider
-{ }

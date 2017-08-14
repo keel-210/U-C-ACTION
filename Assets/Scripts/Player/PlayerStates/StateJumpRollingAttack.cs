@@ -12,8 +12,10 @@ public class StateJumpRollingAttack : PlayerAnimState
     public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PC.ChangeLayer2Invincible();
+        DirectionFix();
         PC.ColliderEnable((int)PlayerAttackColliders.RollingAttack);
         UpVe = new Vector2(UpVelo.x * playeranimator.Direction, UpVelo.y);
+        DownVelo = new Vector2(DownVelo.x * playeranimator.Direction, DownVelo.y);
         rb.velocity = UpVe;
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

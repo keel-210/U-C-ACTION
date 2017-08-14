@@ -12,5 +12,6 @@ public class StateHit : PlayerAnimState
     }
     public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        playeranimator.Hit = false;
     }
 }

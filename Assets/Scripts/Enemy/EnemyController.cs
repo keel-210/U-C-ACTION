@@ -15,7 +15,8 @@ public abstract class EnemyController : MonoBehaviour,IAttackColliders, IDamasab
         set { _Colliders = value; }
     }
     protected Rigidbody2D rb;
-    protected float Direction;
+    protected float Direction = 1;
+    public bool IsHit = false,OnGround = true;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,13 +31,31 @@ public abstract class EnemyController : MonoBehaviour,IAttackColliders, IDamasab
         transform.rotation = Quaternion.Euler(0, 180, 0);
         Direction = -1;
     }
-    public void ColliderEnable(int ACEnum)
+    public void ColliderEnable(int AcNum)
     {
-        Colliders[ACEnum].SetActive(true);
+        Colliders[AcNum].SetActive(true);
     }
     public void ColliderUnable(int ACEnum)
     {
         Colliders[ACEnum].SetActive(false);
+    }
+    public void ChangeLayer2Default()
+    {
+        gameObject.layer = 0;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            OnGround = true;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            OnGround = false;
+        }
     }
     public virtual void TakeDamage(int damage) { }
     public virtual void Hit(Vector2 velo) { }

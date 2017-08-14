@@ -26,23 +26,26 @@ public abstract class PlayerAnimState : StateMachineBehaviour
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        playeranimator.Move = Input.GetAxisRaw("Horizontal");
-        playeranimator.Moving = (Input.GetAxisRaw("Horizontal") != 0);
-        playeranimator.Up = Input.GetAxisRaw("Vertical") == 1;
-        playeranimator.Down = Input.GetAxisRaw("Vertical") == -1;
-        playeranimator.Attack = Input.GetAxisRaw("Fire1") > 0;
-        playeranimator.Attack2 = Input.GetAxisRaw("Fire2") > 0;
-        playeranimator.Health = PC.health;
-        playeranimator.InStateTimer += Time.deltaTime;
-        if(playeranimator.Moving)
+        if(Time.timeScale != 0)
         {
-            playeranimator.Direction = playeranimator.Move;
+            playeranimator.Move = Input.GetAxisRaw("Horizontal");
+            playeranimator.Moving = (Input.GetAxisRaw("Horizontal") != 0);
+            playeranimator.Up = Input.GetAxisRaw("Vertical") == 1;
+            playeranimator.Down = Input.GetAxisRaw("Vertical") == -1;
+            playeranimator.Attack = Input.GetAxisRaw("Fire1") > 0;
+            playeranimator.Attack2 = Input.GetAxisRaw("Fire2") > 0;
+            playeranimator.Health = PC.health;
+            playeranimator.InStateTimer += Time.deltaTime;
+            if (playeranimator.Moving)
+            {
+                playeranimator.Direction = playeranimator.Move;
+            }
+            if (rb.velocity.y < 0 && (stateInfo.IsName("InAir") || stateInfo.IsName("FallAttack") || stateInfo.IsName("Rolling") || stateInfo.IsName("RollingAttack") || stateInfo.IsName("JumpRollingAttack")))
+            {
+                PC.ChangeLayer2Default();
+            }
+            Execute(animator, stateInfo, layerIndex);
         }
-        if (rb.velocity.y < 0 && (stateInfo.IsName("InAir")|| stateInfo.IsName("FallAttack") || stateInfo.IsName("Rolling") || stateInfo.IsName("RollingAttack") || stateInfo.IsName("JumpRollingAttack")))
-        {
-            PC.ChangeLayer2Default();
-        }
-        Execute(animator, stateInfo, layerIndex);
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

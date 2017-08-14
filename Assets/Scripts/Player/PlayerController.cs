@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttackColliders
+public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttackColliders,IHitable
 {
     [SerializeField]
     int _health;
@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
     public PlayerParamater PP { get; set; }
     [SerializeField]
     PlayerEffectEmitter PEE;
+    [SerializeField]
+    ListActivater GameOver;
     Vector2 DefaultColliderSize;
     AnimatorParameter.PlayerAnimator playeranimator = new AnimatorParameter.PlayerAnimator();
 
@@ -91,6 +93,14 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
     public void TakeDamage(int damage)
     {
         health -= damage;
+        if(health < 0)
+        {
+            GameOver.Activate();
+        }
+    }
+    public void Hit(Vector2 velo)
+    {
+        playeranimator.Hit = true;
     }
     public void EffectEmit(int EffectEnum)
     {
