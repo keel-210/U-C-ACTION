@@ -17,6 +17,7 @@ public abstract class EnemyController : MonoBehaviour,IAttackColliders, IDamasab
     protected Rigidbody2D rb;
     protected float Direction = 1;
     public bool IsHit = false,OnGround = true;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();

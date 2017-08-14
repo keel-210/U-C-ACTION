@@ -12,32 +12,18 @@ public class Chaser4Camera : MonoBehaviour
         set { _Player = value; }
     }
     [SerializeField]
-    float _Max_x;
-    public float Max_x
+    private Vector2 _Maxs;
+    public Vector2 Maxs
     {
-        get { return _Max_x; }
-        set { _Max_x = value; }
+        get { return _Maxs; }
+        set { _Maxs = value; }
     }
     [SerializeField]
-    float _Min_x;
-    public float Min_x
+    private Vector2 _Mins;
+    public Vector2 Mins
     {
-        get { return _Min_x; }
-        set { _Min_x = value; }
-    }
-    [SerializeField]
-    float _Max_y;
-    public float Max_y
-    {
-        get { return _Max_y; }
-        set { _Max_y = value; }
-    }
-    [SerializeField]
-    float _Min_y;
-    public float Min_y
-    {
-        get { return _Min_y; }
-        set { _Min_y = value; }
+        get { return _Mins; }
+        set { _Mins = value; }
     }
     [SerializeField]
     float _ChaserRatio;
@@ -59,8 +45,8 @@ public class Chaser4Camera : MonoBehaviour
         if (!Fixed)
         {
             Vector3 NextPos = Vector3.Lerp(transform.position, Player.position + new Vector3(0, 0, transform.position.z), ChaserRatio);
-            float x = Mathf.Clamp(NextPos.x, Min_x, Max_x);
-            float y = Mathf.Clamp(NextPos.y, Min_y + OffsetY, Max_y);
+            float x = Mathf.Clamp(NextPos.x, Mins.x, Maxs.x);
+            float y = Mathf.Clamp(NextPos.y, Mins.y + OffsetY, Maxs.y);
             transform.position = new Vector3(x, y, NextPos.z);
         }
     }
@@ -69,4 +55,31 @@ public class Chaser4Camera : MonoBehaviour
         Fixed = true;
         transform.position = new Vector3(CamPos.x, CamPos.y, transform.position.z);
     }
+#if UNITY_EDITOR
+    void OnDrawGizmosSelected()
+		{
+			// カメラの移動可能な範囲(右下/左上)を取得
+			Vector3 maxXMinY = new Vector3(Maxs.x, Mins.y);
+			Vector3 minXMaxY = new Vector3 (Mins.x, Maxs.y);
+
+			// カメラの移動範囲のGizmoを描画
+			UnityEditor.Handles.DrawSolidRectangleWithOutline (
+				new Vector3[]{ Maxs, maxXMinY, Mins, minXMaxY },
+				new Color(1, 0, 0, 0.1f), Color.white);
+
+
+			// カメラの描画する縦幅・横幅を取得
+			Camera camera = GetComponent<Camera> ();
+			float cameraWidthHalf = camera.orthographicSize * camera.aspect;
+			Vector3 cameraMaxXMinY = new Vector2 (cameraWidthHalf, -camera.orthographicSize);
+			Vector3 cameraMaxXMaxY = new Vector3 (cameraWidthHalf, camera.orthographicSize);
+
+			// カメラの描画範囲のGizmoを描画描画			
+			UnityEditor.Handles.DrawSolidRectangleWithOutline (new Vector3[]{
+				Maxs + (Vector2)cameraMaxXMaxY, maxXMinY + cameraMaxXMinY,
+				Mins - (Vector2)cameraMaxXMaxY, minXMaxY - cameraMaxXMinY
+			}, new Color(1, 0, 0, 0.1f), Color.white);
+		}
+#endif
 }
+
