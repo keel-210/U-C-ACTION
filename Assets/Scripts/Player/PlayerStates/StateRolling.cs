@@ -5,7 +5,9 @@ using UnityEngine;
 public class StateRolling : PlayerAnimState
 {
     [SerializeField]
-    float Speed;
+    AnimationCurve Speed;
+    [SerializeField]
+    float AbsSpeed;
     float dir;
     public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -14,7 +16,7 @@ public class StateRolling : PlayerAnimState
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        rb.velocity = Vector2.right * Speed * dir;
+        rb.velocity = Vector2.right * Speed.Evaluate(playeranimator.InStateTimer) * dir * AbsSpeed;
     }
     public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

@@ -44,9 +44,6 @@ namespace AnimatorParameter
 		public static readonly int BaseLayer_Jump = 1804595349;
 		public static readonly int BaseLayer_SquatAttack = 2018459331;
 		public static readonly int BaseLayer_Landing = 1639993788;
-		public static readonly int States_Invincible = -800127086;
-		public static readonly int States_Blink_Invincible = 672408808;
-		public static readonly int States_Normal = -826140796;
 
 	}
 }
