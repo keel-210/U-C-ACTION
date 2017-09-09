@@ -26,5 +26,6 @@ public class EneStateAttack : EnemyAnimState
     }
     public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        EC.ColliderUnable(AttackNum);
     }
 }
