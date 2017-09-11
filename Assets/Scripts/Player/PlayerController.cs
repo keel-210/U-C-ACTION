@@ -32,8 +32,6 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
     public PlayerParamater PP { get; set; }
     [SerializeField]
     PlayerEffectEmitter PEE;
-    [SerializeField]
-    ListActivater GameOver;
     Vector2 DefaultColliderSize;
     AnimatorParameter.PlayerAnimator playeranimator = new AnimatorParameter.PlayerAnimator();
 
@@ -93,9 +91,9 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
     public void TakeDamage(int damage)
     {
         health -= damage;
-        if(health < 0)
+        if(health <= 0)
         {
-            GameOver.Activate();
+            GameObject.FindObjectOfType<MenuController>().GameOver();
         }
     }
     public void Hit(Vector2 velo)

@@ -20,7 +20,7 @@ public class StateJumpRollingAttack : PlayerAnimState
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        rb.velocity = Vector3.Lerp(rb.velocity, DownVelo, 0.02f);
+        rb.velocity = Vector3.Lerp(rb.velocity, DownVelo, 0.1f);
     }
     public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

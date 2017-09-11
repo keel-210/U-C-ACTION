@@ -85,6 +85,7 @@ public class TutorialMessageAttribute : PropertyDrawer
             var ele2 = property.FindPropertyRelative("Prefab");
             var ele3 = property.FindPropertyRelative("Pos");
             var ele4 = property.FindPropertyRelative("Rot");
+
             var ele1Rect = new Rect(position)
             {
                 height = position.height
@@ -104,6 +105,7 @@ public class TutorialMessageAttribute : PropertyDrawer
                 height = position.height * 2,
                 y = ele3Rect.y + EditorGUIUtility.singleLineHeight + 2
             };
+
             EditorGUI.PropertyField(ele1Rect, ele1);
             EditorGUI.PropertyField(ele2Rect, ele2);
             EditorGUI.PropertyField(ele3Rect, ele3);

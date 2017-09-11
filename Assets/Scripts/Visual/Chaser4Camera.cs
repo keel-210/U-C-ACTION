@@ -5,12 +5,7 @@ using UnityEngine;
 public class Chaser4Camera : MonoBehaviour
 {
     [SerializeField]
-    Transform _Player;
-    public Transform Player
-    {
-        get { return _Player; }
-        set { _Player = value; }
-    }
+    Transform Player;
     [SerializeField]
     private Vector2 _Maxs;
     public Vector2 Maxs
@@ -32,28 +27,35 @@ public class Chaser4Camera : MonoBehaviour
         get { return _ChaserRatio; }
         set { _ChaserRatio = value; }
     }
-    [SerializeField]
-    float _OffsetY;
-    public float OffsetY
-    {
-        get { return _OffsetY; }
-        set { _OffsetY = value; }
-    }
+
     bool Fixed;
+    Vector2 FixedPos;
+
     void FixedUpdate()
     {
         if (!Fixed)
         {
             Vector3 NextPos = Vector3.Lerp(transform.position, Player.position + new Vector3(0, 0, transform.position.z), ChaserRatio);
             float x = Mathf.Clamp(NextPos.x, Mins.x, Maxs.x);
-            float y = Mathf.Clamp(NextPos.y, Mins.y + OffsetY, Maxs.y);
+            float y = Mathf.Clamp(NextPos.y, Mins.y, Maxs.y);
             transform.position = new Vector3(x, y, NextPos.z);
         }
+        else
+        {
+            Vector3 NextPos = Vector3.Lerp(transform.position, new Vector3(FixedPos.x,Player.position.y,transform.position.z), ChaserRatio);
+            float y = Mathf.Clamp(NextPos.y, Mins.y, Maxs.y);
+            transform.position = new Vector3(transform.position.x, y, NextPos.z);
+        }
     }
-    public void FixCamera(Vector2 CamPos)
+
+    public void Fix(Vector2 CamPos)
     {
         Fixed = true;
-        transform.position = new Vector3(CamPos.x, CamPos.y, transform.position.z);
+        FixedPos = CamPos;
+    }
+    public void UnFix()
+    {
+        Fixed = false;
     }
 #if UNITY_EDITOR
     void OnDrawGizmosSelected()

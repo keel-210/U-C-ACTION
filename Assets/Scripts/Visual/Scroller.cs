@@ -11,29 +11,29 @@ public class Scroller : MonoBehaviour
     Transform player;
     List<Renderer> rendList = new List<Renderer>();
     Vector3 spriteSize;
-    float PosCash,direction = 1;
+    float PosCash, direction = 1;
     void Start()
     {
         spriteSize = GetComponent<SpriteRenderer>().bounds.size;
+        spriteCount = transform.parent.transform.childCount;
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
     void Update()
     {
         float offset = PosCash - player.position.x;
-        if(offset > 0)
-        {
-            direction = 1;
-        }
-        else
+        if (offset > 0)
         {
             direction = -1;
         }
-        transform.position += Vector3.left * ScrollSpeed * offset;
+        else
+        {
+            direction = 1;
+        }
+        transform.position += Vector3.left * ScrollSpeed * -offset;
         PosCash = player.position.x;
     }
     void OnBecameInvisible()
     {
-        float width = GetComponent<SpriteRenderer>().bounds.size.x;
-        transform.position +=  -direction * Vector3.right * width * spriteCount;
+        transform.position += direction * Vector3.right * spriteSize.x * spriteCount;
     }
 }
