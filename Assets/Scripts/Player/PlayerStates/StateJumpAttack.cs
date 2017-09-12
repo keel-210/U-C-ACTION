@@ -9,6 +9,7 @@ public class StateJumpAttack : PlayerAnimState
     public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PC.ColliderEnable((int)PlayerAttackColliders.JumpAttack);
+        playeranimator.JumpAttacked = true;
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

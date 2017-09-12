@@ -42,7 +42,7 @@ public abstract class EnemyController : MonoBehaviour,IAttackColliders, IDamasab
     }
     public void ChangeLayer2Default()
     {
-        gameObject.layer = 0;
+        gameObject.layer = 27;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

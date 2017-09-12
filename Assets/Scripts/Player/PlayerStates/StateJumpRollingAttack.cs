@@ -17,6 +17,7 @@ public class StateJumpRollingAttack : PlayerAnimState
         UpVe = new Vector2(UpVelo.x * playeranimator.Direction, UpVelo.y);
         DownVelo = new Vector2(DownVelo.x * playeranimator.Direction, DownVelo.y);
         rb.velocity = UpVe;
+        playeranimator.JumpRollinged++;
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

@@ -21,6 +21,8 @@ namespace AnimatorParameter
 		protected readonly static int HealthHash = -915003867; public int Health{ get{ return animator.GetInteger(HealthHash); } set{ animator.SetInteger(HealthHash, value); }}
 		protected readonly static int JumpZeroFlgHash = 524162288; public bool JumpZeroFlg{ get{ return animator.GetBool(JumpZeroFlgHash); } set{ animator.SetBool(JumpZeroFlgHash, value); }}
 		protected readonly static int HitHash = 1654612129; public bool Hit{ get{ return animator.GetBool(HitHash); } set{ animator.SetBool(HitHash, value); }}
+		protected readonly static int JumpAttackedHash = 217795252; public bool JumpAttacked{ get{ return animator.GetBool(JumpAttackedHash); } set{ animator.SetBool(JumpAttackedHash, value); }}
+		protected readonly static int JumpRollingedHash = 1864325393; public int JumpRollinged{ get{ return animator.GetInteger(JumpRollingedHash); } set{ animator.SetInteger(JumpRollingedHash, value); }}
 		public static readonly int BaseLayer_Hit_Hit = 1431649142;
 		public static readonly int BaseLayer_Hit_HitDeath = -628763217;
 		public static readonly int BaseLayer_SquatWait_SquatWait = 936402402;
@@ -40,10 +42,11 @@ namespace AnimatorParameter
 		public static readonly int BaseLayer_DashAttack = 1722724210;
 		public static readonly int BaseLayer_Rolling = -748704560;
 		public static readonly int BaseLayer_RollingAttack = -81472984;
-		public static readonly int BaseLayer_Attack1 = -1133881065;
+		public static readonly int BaseLayer_Attack1_1 = 655989126;
 		public static readonly int BaseLayer_Jump = 1804595349;
 		public static readonly int BaseLayer_SquatAttack = 2018459331;
 		public static readonly int BaseLayer_Landing = 1639993788;
+		public static readonly int BaseLayer_Attack1_2 = -1106196420;
 
 	}
 }

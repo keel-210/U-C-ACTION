@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
         playeranimator.animator = PP.PlayerAnimator;
         DefaultColliderSize = HitCollider.size;
 	}
+    //4OnGround
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == GroundTag)
@@ -48,6 +49,8 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
             playeranimator.OnGround = true;
             playeranimator.HasDoubleJumped = false;
             playeranimator.DashAttacked = 0;
+            playeranimator.JumpAttacked = false;
+            playeranimator.JumpRollinged = 0;
         }
     }
     private void OnCollisionStay2D(Collision2D collision)
@@ -67,6 +70,7 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
             ChangeLayer2Squat();
         }
     }
+    //LayerChanging
     public void ChangeLayer2Invincible()
     {
         ChangeLayer(HitCollider.gameObject, 9);
@@ -80,6 +84,11 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
     {
         ChangeLayer(gameObject, 16);
     }
+    void ChangeLayer(GameObject obj, int LayerNumber)
+    {
+        obj.layer = LayerNumber;
+    }
+    //ColliderSizeChanging
     public void ChangeColliderSize(Vector2 size)
     {
         HitCollider.size = size;
@@ -88,6 +97,7 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
     {
         HitCollider.size = DefaultColliderSize;
     }
+    //IDamagable
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -96,14 +106,17 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
             GameObject.FindObjectOfType<MenuController>().GameOver();
         }
     }
+    //IHittable
     public void Hit(Vector2 velo)
     {
         playeranimator.Hit = true;
     }
+    //AttackEffect
     public void EffectEmit(int EffectEnum)
     {
         PEE.Emit((PlayerEffectEnum)EffectEnum);
     }
+    //AttackCollider
     public void ColliderEnable(int ACEnum)
     {
         Colliders[ACEnum].SetActive(true);
@@ -111,10 +124,6 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
     public void ColliderUnable(int ACEnum)
     {
         Colliders[ACEnum].SetActive(false);
-    }
-    void ChangeLayer(GameObject obj,int LayerNumber)
-    {
-        obj.layer = LayerNumber;
     }
 }
 public enum PlayerAttackColliders
