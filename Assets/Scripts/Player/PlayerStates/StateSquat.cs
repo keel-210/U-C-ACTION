@@ -10,6 +10,7 @@ public class StateSquat : PlayerAnimState
         rb.velocity = Vector2.zero;
         PC.ChangeColliderSize(new Vector2(3,3));
         PC.ChangeLayer2Squat();
+        playeranimator.JumpRollinged = 0;
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

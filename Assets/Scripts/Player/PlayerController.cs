@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
             playeranimator.HasDoubleJumped = false;
             playeranimator.DashAttacked = 0;
             playeranimator.JumpAttacked = false;
-            playeranimator.JumpRollinged = 0;
         }
     }
     private void OnCollisionStay2D(Collision2D collision)

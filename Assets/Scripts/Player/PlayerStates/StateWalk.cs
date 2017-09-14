@@ -6,7 +6,7 @@ public class StateWalk : PlayerAnimState
 {
     public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        playeranimator.JumpRollinged = 0;
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

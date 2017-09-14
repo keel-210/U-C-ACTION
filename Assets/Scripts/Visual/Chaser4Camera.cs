@@ -28,23 +28,23 @@ public class Chaser4Camera : MonoBehaviour
         set { _ChaserRatio = value; }
     }
 
-    bool Fixed;
+    public bool Fixed;
     Vector2 FixedPos;
 
     void FixedUpdate()
     {
         if (!Fixed)
         {
-            Vector3 NextPos = Vector3.Lerp(transform.position, Player.position + new Vector3(0, 0, transform.position.z), ChaserRatio);
+            Vector3 NextPos = Vector3.MoveTowards(transform.position, Player.position + new Vector3(0, 0, transform.position.z), ChaserRatio);
             float x = Mathf.Clamp(NextPos.x, Mins.x, Maxs.x);
             float y = Mathf.Clamp(NextPos.y, Mins.y, Maxs.y);
             transform.position = new Vector3(x, y, NextPos.z);
         }
         else
         {
-            Vector3 NextPos = Vector3.Lerp(transform.position, new Vector3(FixedPos.x,Player.position.y,transform.position.z), ChaserRatio);
+            Vector3 NextPos = Vector3.MoveTowards(transform.position, new Vector3(FixedPos.x,Player.position.y,transform.position.z), ChaserRatio);
             float y = Mathf.Clamp(NextPos.y, Mins.y, Maxs.y);
-            transform.position = new Vector3(transform.position.x, y, NextPos.z);
+            transform.position = new Vector3(NextPos.x, y, NextPos.z);
         }
     }
 
