@@ -5,8 +5,6 @@ using UnityEngine;
 public class Chaser4Camera : MonoBehaviour
 {
     [SerializeField]
-    Transform Player;
-    [SerializeField]
     private Vector2 _Maxs;
     public Vector2 Maxs
     {
@@ -28,9 +26,13 @@ public class Chaser4Camera : MonoBehaviour
         set { _ChaserRatio = value; }
     }
 
+    Transform Player;
     public bool Fixed;
     Vector2 FixedPos;
-
+    private void Start()
+    {
+        Player = GameObject.FindWithTag("Player").transform;
+    }
     void FixedUpdate()
     {
         if (!Fixed)

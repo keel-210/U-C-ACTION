@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttackColliders,IHitable
 {
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
         get { return _magic; }
         set { _magic = value; }
     }
+
     [SerializeField]
     private List<GameObject> _Colliders;
     public List<GameObject> Colliders
@@ -25,22 +27,46 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
         get { return _Colliders; }
         set { _Colliders = value; }
     }
+
     [SerializeField]
     BoxCollider2D HitCollider;
-    [SerializeField,Tag]
-    string GroundTag;
+
     public PlayerParamater PP { get; set; }
-    [SerializeField]
+
     PlayerEffectEmitter PEE;
+    string GroundTag = "Ground";
     Vector2 DefaultColliderSize;
     AnimatorParameter.PlayerAnimator playeranimator = new AnimatorParameter.PlayerAnimator();
-
+    //Singleton
+    private static GameObject  _instance;
+    public static  GameObject instance
+    {
+        get { return _instance; }
+    }
+    private void Awake()
+    {
+        if(PlayerController.instance == null)
+        {
+            _instance = this.gameObject;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+    //Costractor
     void Start ()
     {
         PP = GetComponent<PlayerParamater>();
         playeranimator.animator = PP.PlayerAnimator;
         DefaultColliderSize = HitCollider.size;
+        PEE = GetComponent<PlayerEffectEmitter>();
+        DontDestroyOnLoad(this.gameObject);
 	}
+    private void OnLevelWasLoaded(int level)
+    {
+        transform.position = new Vector3(0, 0.1f, 0);
+    }
     //4OnGround
     private void OnCollisionEnter2D(Collision2D collision)
     {

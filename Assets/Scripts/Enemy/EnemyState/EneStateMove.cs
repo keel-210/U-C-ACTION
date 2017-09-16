@@ -14,19 +14,8 @@ public class EneStateMove : EnemyAnimState
         float x = animator.GetFloat("PosDifX");
         float y = animator.GetFloat("PosDifY");
         dif = new Vector2(x, y);
-        if (MovementFor2D)
-        {
-            dif = new Vector2(x, y);
-        }
-        else
-        {
-            dif = new Vector2(dif.x, 0);
-            if(dif.x == 0)
-            {
-                dif = new Vector2(1, 0);
-            }
-        }
         dif = dif.normalized;
+
         if (dif.x > 0)
         {
             EC.Direction2Zero();
@@ -40,7 +29,14 @@ public class EneStateMove : EnemyAnimState
     {
         if (!EC.IsHit)
         {
-            rb.velocity = dif * -Speed;
+            if (MovementFor2D)
+            {
+                rb.velocity = dif * -Speed;
+            }
+            else
+            {
+                rb.velocity = new Vector2(dif.x * -Speed, rb.velocity.y);
+            }
         }
     }
     public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

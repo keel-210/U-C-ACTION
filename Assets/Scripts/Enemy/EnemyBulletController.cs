@@ -7,6 +7,8 @@ public class EnemyBulletController : MonoBehaviour
 {
     [SerializeField]
     float BulletSpeed;
+    [SerializeField]
+    bool ShouldChasePlayer;
 
     Rigidbody2D rb;
     Transform Target;
@@ -18,14 +20,14 @@ public class EnemyBulletController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        StartCoroutine(this.DelayMethod(10f, () => { DestroyBullet(); }));
-
-        if (Target)
+        else if (ShouldChasePlayer)
         {
-            Vector3 velo = Vector3.Normalize(transform.position - Target.position);
-            rb.velocity = BulletSpeed * velo;
+            transform.rotation = Quaternion.FromToRotation(Vector3.up, Target.position - transform.position);
         }
+
+        StartCoroutine(this.DelayMethod(20f, () => { DestroyBullet(); }));
+
+        rb.velocity = transform.up * BulletSpeed;
     }
 
     void OnTriggerEnter2D(Collider2D obj)
