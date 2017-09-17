@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttackColliders,IHitable
+public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter, IAttackColliders, IHitable
 {
     [SerializeField]
     int _health;
@@ -38,14 +38,14 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
     Vector2 DefaultColliderSize;
     AnimatorParameter.PlayerAnimator playeranimator = new AnimatorParameter.PlayerAnimator();
     //Singleton
-    private static GameObject  _instance;
-    public static  GameObject instance
+    private static GameObject _instance;
+    public static GameObject instance
     {
         get { return _instance; }
     }
     private void Awake()
     {
-        if(PlayerController.instance == null)
+        if (PlayerController.instance == null)
         {
             _instance = this.gameObject;
         }
@@ -55,14 +55,14 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
         }
     }
     //Costractor
-    void Start ()
+    void Start()
     {
         PP = GetComponent<PlayerParamater>();
         playeranimator.animator = PP.PlayerAnimator;
         DefaultColliderSize = HitCollider.size;
         PEE = GetComponent<PlayerEffectEmitter>();
         DontDestroyOnLoad(this.gameObject);
-	}
+    }
     private void OnLevelWasLoaded(int level)
     {
         transform.position = new Vector3(0, 0.1f, 0);
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
     //4OnGround
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == GroundTag)
+        if (collision.gameObject.tag == GroundTag)
         {
             playeranimator.OnGround = true;
             playeranimator.HasDoubleJumped = false;
@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
     public void TakeDamage(int damage)
     {
         health -= damage;
-        if(health <= 0)
+        if (health <= 0)
         {
             GameObject.FindObjectOfType<MenuController>().GameOver();
         }
@@ -152,4 +152,4 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter,IAttac
     }
 }
 public enum PlayerAttackColliders
-{ Attack1,Attack2,Attack3,JumpAttack,RollingAttack,FallAttack,AirAttack, DashAttack,SquatAttack }
+{ Attack1, Attack2, Attack3, JumpAttack, RollingAttack, FallAttack, AirAttack, DashAttack, SquatAttack, AirAttack2 }

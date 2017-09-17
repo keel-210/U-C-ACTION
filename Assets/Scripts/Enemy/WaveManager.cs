@@ -32,7 +32,7 @@ public class WaveManager : MonoBehaviour
                 if (player.transform.position.x > wp.Pos.x)
                 {
                     if (!wp.Wave.activeInHierarchy)
-                        Camera.main.GetComponent<Chaser4Camera>().Fix(wp.Pos);
+                        Camera.main.GetComponent<Chaser4Camera>().Fix(wp.Pos,CameraFixType.xFix);
                     wp.Wave.SetActive(true);
                     NowWave = wp.Wave.transform;
                     NowEmitter = wp.Wave.GetComponent<EnemyListEmitter>();
@@ -44,7 +44,7 @@ public class WaveManager : MonoBehaviour
                 if (player.transform.position.y > wp.Pos.y)
                 {
                     if (!wp.Wave.activeInHierarchy)
-                        Camera.main.GetComponent<Chaser4Camera>().Fix(wp.Pos);
+                        Camera.main.GetComponent<Chaser4Camera>().Fix(wp.Pos,CameraFixType.yFix);
                     wp.Wave.SetActive(true);
                     NowWave = wp.Wave.transform;
                     NowEmitter = wp.Wave.GetComponent<EnemyListEmitter>();

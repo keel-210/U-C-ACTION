@@ -47,6 +47,7 @@ namespace AnimatorParameter
 		public static readonly int BaseLayer_SquatAttack = 2018459331;
 		public static readonly int BaseLayer_Landing = 1639993788;
 		public static readonly int BaseLayer_Attack1_2 = -1106196420;
+		public static readonly int BaseLayer_AirAttack2 = 1196047482;
 
 	}
 }

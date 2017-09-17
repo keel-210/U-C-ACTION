@@ -2,22 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateJumpAttack : PlayerAnimState
+public class StateMove : PlayerAnimState
 {
     [SerializeField]
-    Vector2 velo;
+    AnimationCurve XSpeed, YSpeed;
+    [SerializeField]
+    float MaxX, MaxY;
+
     public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PC.ColliderEnable((int)PlayerAttackColliders.JumpAttack);
-        playeranimator.JumpAttacked = true;
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        rb.velocity = velo;
+        float x = XSpeed.Evaluate(playeranimator.InStateTimer) * MaxX;
+        float y = YSpeed.Evaluate(playeranimator.InStateTimer) * MaxY;
+        rb.velocity = new Vector2(playeranimator.Direction * x, y);
     }
     public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        rb.velocity = new Vector2(0,10);
-        PC.ColliderUnable((int)PlayerAttackColliders.JumpAttack);
+
     }
 }

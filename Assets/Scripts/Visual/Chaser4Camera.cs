@@ -5,52 +5,60 @@ using UnityEngine;
 public class Chaser4Camera : MonoBehaviour
 {
     [SerializeField]
-    private Vector2 _Maxs;
-    public Vector2 Maxs
-    {
-        get { return _Maxs; }
-        set { _Maxs = value; }
-    }
+    float ChaserRatio;
+
     [SerializeField]
-    private Vector2 _Mins;
-    public Vector2 Mins
-    {
-        get { return _Mins; }
-        set { _Mins = value; }
-    }
-    [SerializeField]
-    float _ChaserRatio;
-    public float ChaserRatio
-    {
-        get { return _ChaserRatio; }
-        set { _ChaserRatio = value; }
-    }
+    List<Area> areas = new List<Area>();
 
     Transform Player;
     public bool Fixed;
     Vector2 FixedPos;
+    CameraFixType fixType;
     private void Start()
     {
         Player = GameObject.FindWithTag("Player").transform;
     }
     void FixedUpdate()
     {
+        Area NowArea = areas[0];
+        foreach(Area a in areas)
+        {
+            Vector2 pos = transform.position;
+            if(a.Mins.x <= pos.x && pos.x <= a.Maxs.x && a.Mins.y <= pos.y && pos.y <= a.Maxs.y)
+            {
+                NowArea = a;
+            }
+        }
         if (!Fixed)
         {
             Vector3 NextPos = Vector3.MoveTowards(transform.position, Player.position + new Vector3(0, 0, transform.position.z), ChaserRatio);
-            float x = Mathf.Clamp(NextPos.x, Mins.x, Maxs.x);
-            float y = Mathf.Clamp(NextPos.y, Mins.y, Maxs.y);
+            float x = Mathf.Clamp(NextPos.x, NowArea.Mins.x, NowArea.Maxs.x);
+            float y = Mathf.Clamp(NextPos.y, NowArea.Mins.y, NowArea.Maxs.y);
             transform.position = new Vector3(x, y, NextPos.z);
         }
         else
         {
-            Vector3 NextPos = Vector3.MoveTowards(transform.position, new Vector3(FixedPos.x,Player.position.y,transform.position.z), ChaserRatio);
-            float y = Mathf.Clamp(NextPos.y, Mins.y, Maxs.y);
-            transform.position = new Vector3(NextPos.x, y, NextPos.z);
+            switch (fixType)
+            {
+                case CameraFixType.xFix:
+                    Vector3 NextPosX = Vector3.MoveTowards(transform.position, new Vector3(FixedPos.x, Player.position.y, transform.position.z), ChaserRatio);
+                    float y = Mathf.Clamp(NextPosX.y, NowArea.Mins.y, NowArea.Maxs.y);
+                    transform.position = new Vector3(NextPosX.x, y, NextPosX.z);
+                    break;
+                case CameraFixType.yFix:
+                    Vector3 NextPosY = Vector3.MoveTowards(transform.position, new Vector3(Player.position.x, FixedPos.y, transform.position.z), ChaserRatio);
+                    float x = Mathf.Clamp(NextPosY.x, NowArea.Mins.x, NowArea.Maxs.x);
+                    transform.position = new Vector3(x, NextPosY.y, NextPosY.z);
+                    break;
+                case CameraFixType.xyFix:
+                    Vector3 NextPosXY = Vector3.MoveTowards(transform.position, new Vector3(Player.position.x, FixedPos.y, transform.position.z), ChaserRatio);
+                    transform.position = NextPosXY;
+                    break;
+            }
         }
     }
 
-    public void Fix(Vector2 CamPos)
+    public void Fix(Vector2 CamPos,CameraFixType fixType)
     {
         Fixed = true;
         FixedPos = CamPos;
@@ -59,31 +67,43 @@ public class Chaser4Camera : MonoBehaviour
     {
         Fixed = false;
     }
+
+    [System.Serializable]
+    public class Area
+    {
+        public Vector2 Maxs, Mins;
+    }
 #if UNITY_EDITOR
     void OnDrawGizmosSelected()
-		{
-			// カメラの移動可能な範囲(右下/左上)を取得
-			Vector3 maxXMinY = new Vector3(Maxs.x, Mins.y);
-			Vector3 minXMaxY = new Vector3 (Mins.x, Maxs.y);
+    {
+        foreach (Area a in areas)
+        {
+            // カメラの移動可能な範囲(右下/左上)を取得
+            Vector3 maxXMinY = new Vector3(a.Maxs.x, a.Mins.y);
+            Vector3 minXMaxY = new Vector3(a.Mins.x, a.Maxs.y);
 
-			// カメラの移動範囲のGizmoを描画
-			UnityEditor.Handles.DrawSolidRectangleWithOutline (
-				new Vector3[]{ Maxs, maxXMinY, Mins, minXMaxY },
-				new Color(1, 0, 0, 0.1f), Color.white);
+            // カメラの移動範囲のGizmoを描画
+            UnityEditor.Handles.DrawSolidRectangleWithOutline(
+                new Vector3[] { a.Maxs, maxXMinY, a.Mins, minXMaxY },
+                new Color(0, 0, 1, 0.2f), Color.white);
 
 
-			// カメラの描画する縦幅・横幅を取得
-			Camera camera = GetComponent<Camera> ();
-			float cameraWidthHalf = camera.orthographicSize * camera.aspect;
-			Vector3 cameraMaxXMinY = new Vector2 (cameraWidthHalf, -camera.orthographicSize);
-			Vector3 cameraMaxXMaxY = new Vector3 (cameraWidthHalf, camera.orthographicSize);
+            // カメラの描画する縦幅・横幅を取得
+            Camera camera = GetComponent<Camera>();
+            float cameraWidthHalf = camera.orthographicSize * camera.aspect;
+            Vector3 cameraMaxXMinY = new Vector2(cameraWidthHalf, -camera.orthographicSize);
+            Vector3 cameraMaxXMaxY = new Vector3(cameraWidthHalf, camera.orthographicSize);
 
-			// カメラの描画範囲のGizmoを描画描画			
-			UnityEditor.Handles.DrawSolidRectangleWithOutline (new Vector3[]{
-				Maxs + (Vector2)cameraMaxXMaxY, maxXMinY + cameraMaxXMinY,
-				Mins - (Vector2)cameraMaxXMaxY, minXMaxY - cameraMaxXMinY
-			}, new Color(1, 0, 0, 0.1f), Color.white);
-		}
+            // カメラの描画範囲のGizmoを描画描画			
+            UnityEditor.Handles.DrawSolidRectangleWithOutline(new Vector3[]{
+                a.Maxs + (Vector2)cameraMaxXMaxY, maxXMinY + cameraMaxXMinY,
+                a.Mins - (Vector2)cameraMaxXMaxY, minXMaxY - cameraMaxXMinY
+            }, new Color(0, 0, 0, 0), Color.white);
+        }
+    }
 #endif
 }
-
+public enum CameraFixType
+{
+    xFix,yFix,xyFix
+}
