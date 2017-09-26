@@ -15,7 +15,11 @@ public class EneStateMove : EnemyAnimState
         float y = animator.GetFloat("PosDifY");
         dif = new Vector2(x, y);
         dif = dif.normalized;
-
+        
+        if(dif.x == 0 && dif.y == 0)
+        {
+            dif = Vector2.right;
+        }
         if (dif.x > 0)
         {
             EC.Direction2Zero();

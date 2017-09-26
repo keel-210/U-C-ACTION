@@ -21,7 +21,8 @@ public class Chaser4Camera : MonoBehaviour
     void FixedUpdate()
     {
         Area NowArea = areas[0];
-        foreach(Area a in areas)
+        Vector3 NextPos = Vector3.MoveTowards(transform.position, Player.position + new Vector3(0, 0, transform.position.z), ChaserRatio);
+        foreach (Area a in areas)
         {
             Vector2 pos = transform.position;
             if(a.Mins.x <= pos.x && pos.x <= a.Maxs.x && a.Mins.y <= pos.y && pos.y <= a.Maxs.y)
@@ -31,7 +32,6 @@ public class Chaser4Camera : MonoBehaviour
         }
         if (!Fixed)
         {
-            Vector3 NextPos = Vector3.MoveTowards(transform.position, Player.position + new Vector3(0, 0, transform.position.z), ChaserRatio);
             float x = Mathf.Clamp(NextPos.x, NowArea.Mins.x, NowArea.Maxs.x);
             float y = Mathf.Clamp(NextPos.y, NowArea.Mins.y, NowArea.Maxs.y);
             transform.position = new Vector3(x, y, NextPos.z);

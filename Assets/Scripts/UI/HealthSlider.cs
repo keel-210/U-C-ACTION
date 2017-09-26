@@ -21,6 +21,8 @@ public class HealthSlider : MonoBehaviour
         }
         slider = GetComponent<Slider>();
         health = obj.GetComponent<Health>();
+        slider.maxValue = health.health;
+        slider.value = health.health;
 	}
 	void Update()
     {
