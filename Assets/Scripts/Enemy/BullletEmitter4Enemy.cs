@@ -10,8 +10,4 @@ public class BullletEmitter4Enemy : MonoBehaviour
     {
         Instantiate(bullet, transform.position, transform.rotation);
     }
-    private void OnDisable()
-    {
-        
-    }
 }

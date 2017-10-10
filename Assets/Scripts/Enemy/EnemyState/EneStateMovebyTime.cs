@@ -8,7 +8,11 @@ public class EneStateMovebyTime : EnemyAnimState
     AnimationCurve SpeedCurve;
     [SerializeField]
     bool MovementFor2D;
+    [SerializeField]
+    float RepeatTime,Speed;
+
     Vector2 dif;
+
     public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         float x = animator.GetFloat("PosDifX");
@@ -19,7 +23,7 @@ public class EneStateMovebyTime : EnemyAnimState
         }
         else
         {
-            dif = new Vector2(dif.x, 0);
+            dif = new Vector2(x, 0);
         }
         dif = dif.normalized;
         if (dif.x > 0)
@@ -33,7 +37,7 @@ public class EneStateMovebyTime : EnemyAnimState
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        rb.velocity = dif * SpeedCurve.Evaluate(animator.GetFloat("InStateTimer"));
+        rb.velocity = -dif * Speed * SpeedCurve.Evaluate(Mathf.Repeat(animator.GetFloat("InStateTimer"),RepeatTime));
     }
     public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

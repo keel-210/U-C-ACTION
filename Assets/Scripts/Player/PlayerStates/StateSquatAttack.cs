@@ -9,7 +9,6 @@ public class StateSquatAttack : PlayerAnimState
     Vector2 rbVelo;
     public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PC.ChangeLayer2Invincible();
         PC.ColliderEnable((int)PlayerAttackColliders.SquatAttack);
         rbVelo = new Vector2(velo.x * playeranimator.Direction, velo.y);
     }

@@ -35,7 +35,7 @@ public class EneStateMove : EnemyAnimState
         {
             if (MovementFor2D)
             {
-                rb.velocity = dif * -Speed;
+                rb.velocity = dif * Speed;
             }
             else
             {
@@ -45,6 +45,6 @@ public class EneStateMove : EnemyAnimState
     }
     public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        rb.velocity = Vector2.zero;
     }
 }

@@ -30,7 +30,7 @@ public class AgitateController : MonoBehaviour
         {
             GameObject go = GetInstance((Random.Range(0,Agitatees.Count)));
             go.transform.parent = transform.root;
-            go.transform.localPosition = Vector3.zero;
+            go.transform.localPosition = new Vector3(5 * (Random.value-0.5f), 5 * (Random.value - 0.5f), 0);
             Timer = 0;
         }
 	}

@@ -40,7 +40,7 @@ public abstract class PlayerAnimState : StateMachineBehaviour
             {
                 playeranimator.Direction = playeranimator.Move;
             }
-            if (rb.velocity.y < 0 && (stateInfo.IsName("InAir") || stateInfo.IsName("FallAttack") || stateInfo.IsName("Rolling") || stateInfo.IsName("RollingAttack") || stateInfo.IsName("JumpRollingAttack")))
+            if (rb.velocity.y < 0 && (stateInfo.IsName("InAir") || stateInfo.IsName("FallAttack") || stateInfo.IsName("RollingAttack") || stateInfo.IsName("JumpRollingAttack")))
             {
                 PC.ChangeLayer2Default();
             }

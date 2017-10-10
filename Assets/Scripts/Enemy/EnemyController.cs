@@ -15,7 +15,6 @@ public abstract class EnemyController : MonoBehaviour,IAttackColliders, IDamasab
         set { _Colliders = value; }
     }
     protected Rigidbody2D rb;
-    protected float Direction = 1;
     public bool IsHit = false,OnGround = true;
 
     private void Start()
@@ -25,12 +24,10 @@ public abstract class EnemyController : MonoBehaviour,IAttackColliders, IDamasab
     public void Direction2Zero()
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);
-        Direction = 1;
     }
     public void Direction2Opposite()
     {
         transform.rotation = Quaternion.Euler(0, 180, 0);
-        Direction = -1;
     }
     public void ColliderEnable(int AcNum)
     {

@@ -15,13 +15,13 @@ public class StateJumpRollingAttack : PlayerAnimState
         DirectionFix();
         PC.ColliderEnable((int)PlayerAttackColliders.RollingAttack);
         UpVe = new Vector2(UpVelo.x * playeranimator.Direction, UpVelo.y);
-        DownVelo = new Vector2(DownVelo.x * playeranimator.Direction, DownVelo.y);
+        DoVe = new Vector2(DownVelo.x * playeranimator.Direction, DownVelo.y);
         rb.velocity = UpVe;
         playeranimator.JumpRollinged++;
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        rb.velocity = Vector3.Lerp(rb.velocity, DownVelo, 0.1f);
+        rb.velocity = Vector3.Lerp(rb.velocity, DoVe, 0.1f);
     }
     public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

@@ -5,60 +5,64 @@ using UnityEngine;
 public class Chaser4Camera : MonoBehaviour
 {
     [SerializeField]
-    float ChaserRatio;
-
+    float ChaserRatio, offsetY;
     [SerializeField]
     List<Area> areas = new List<Area>();
-
-    Transform Player;
+    [SerializeField]
+    Transform Target;
     public bool Fixed;
     Vector2 FixedPos;
+    Area NowArea;
     CameraFixType fixType;
     private void Start()
     {
-        Player = GameObject.FindWithTag("Player").transform;
+        NowArea = areas[0];
+        Target = GameObject.FindGameObjectWithTag("Player").transform;
     }
     void FixedUpdate()
     {
-        Area NowArea = areas[0];
-        Vector3 NextPos = Vector3.MoveTowards(transform.position, Player.position + new Vector3(0, 0, transform.position.z), ChaserRatio);
+        Vector3 NextPos = Vector3.MoveTowards(transform.position, Target.position + new Vector3(0, 0, transform.position.z), ChaserRatio);
         foreach (Area a in areas)
         {
-            Vector2 pos = transform.position;
-            if(a.Mins.x <= pos.x && pos.x <= a.Maxs.x && a.Mins.y <= pos.y && pos.y <= a.Maxs.y)
+            Vector2 pos = NextPos;
+            if (a.Mins.x <= pos.x && pos.x <= a.Maxs.x)
             {
                 NowArea = a;
+                if (a.Mins.y <= pos.y && pos.y <= a.Maxs.y)
+                {
+                    NowArea = a;
+                }
             }
         }
         if (!Fixed)
         {
             float x = Mathf.Clamp(NextPos.x, NowArea.Mins.x, NowArea.Maxs.x);
             float y = Mathf.Clamp(NextPos.y, NowArea.Mins.y, NowArea.Maxs.y);
-            transform.position = new Vector3(x, y, NextPos.z);
+            transform.position = Vector3.MoveTowards(transform.position,new Vector3(x, y, NextPos.z),ChaserRatio);
         }
         else
         {
             switch (fixType)
             {
                 case CameraFixType.xFix:
-                    Vector3 NextPosX = Vector3.MoveTowards(transform.position, new Vector3(FixedPos.x, Player.position.y, transform.position.z), ChaserRatio);
+                    Vector3 NextPosX = Vector3.MoveTowards(transform.position, new Vector3(FixedPos.x, Target.position.y, transform.position.z), ChaserRatio);
                     float y = Mathf.Clamp(NextPosX.y, NowArea.Mins.y, NowArea.Maxs.y);
                     transform.position = new Vector3(NextPosX.x, y, NextPosX.z);
                     break;
                 case CameraFixType.yFix:
-                    Vector3 NextPosY = Vector3.MoveTowards(transform.position, new Vector3(Player.position.x, FixedPos.y, transform.position.z), ChaserRatio);
+                    Vector3 NextPosY = Vector3.MoveTowards(transform.position, new Vector3(Target.position.x, FixedPos.y, transform.position.z), ChaserRatio);
                     float x = Mathf.Clamp(NextPosY.x, NowArea.Mins.x, NowArea.Maxs.x);
                     transform.position = new Vector3(x, NextPosY.y, NextPosY.z);
                     break;
                 case CameraFixType.xyFix:
-                    Vector3 NextPosXY = Vector3.MoveTowards(transform.position, new Vector3(Player.position.x, FixedPos.y, transform.position.z), ChaserRatio);
+                    Vector3 NextPosXY = Vector3.MoveTowards(transform.position, new Vector3(Target.position.x, FixedPos.y, transform.position.z), ChaserRatio);
                     transform.position = NextPosXY;
                     break;
             }
         }
     }
 
-    public void Fix(Vector2 CamPos,CameraFixType fixType)
+    public void Fix(Vector2 CamPos, CameraFixType fixType)
     {
         Fixed = true;
         FixedPos = CamPos;
@@ -105,5 +109,5 @@ public class Chaser4Camera : MonoBehaviour
 }
 public enum CameraFixType
 {
-    xFix,yFix,xyFix
+    xFix, yFix, xyFix
 }

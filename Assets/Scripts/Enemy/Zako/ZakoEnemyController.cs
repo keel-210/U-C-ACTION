@@ -11,6 +11,6 @@ public class ZakoEnemyController : EnemyController
     public override void Hit(Vector2 velo)
     {
         IsHit = true;
-        rb.velocity = new Vector2(velo.x * Direction, velo.y);
+        rb.velocity = new Vector2(velo.x, velo.y);
     }
 }

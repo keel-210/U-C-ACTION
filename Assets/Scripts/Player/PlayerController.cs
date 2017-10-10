@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter, IAtta
     }
 
     [SerializeField]
-    BoxCollider2D HitCollider;
+    public BoxCollider2D HitCollider;
 
     public PlayerParamater PP { get; set; }
 

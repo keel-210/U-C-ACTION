@@ -7,8 +7,6 @@ public class ContinuousAttack : MonoBehaviour
     [SerializeField]
     int Damage;
     [SerializeField]
-    float IntervalTime;
-    [SerializeField]
     Vector2 HitVelo;
     [SerializeField]
     Object Effect;
@@ -19,9 +17,9 @@ public class ContinuousAttack : MonoBehaviour
         col = GetComponent<Collider2D>();
         gameObject.SetActive(false);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        var d = collision.GetComponent<IDamasable>();
+        var d = collision.GetComponentInParent<IDamasable>();
         if (d != null)
         {
             d.TakeDamage(Damage);
@@ -44,9 +42,5 @@ public class ContinuousAttack : MonoBehaviour
         {
             Instantiate(Effect, transform.position, transform.rotation);
         }
-    }
-    private void Update()
-    {
-        
     }
 }

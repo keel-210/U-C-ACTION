@@ -13,15 +13,15 @@ namespace AnimatorParameter
 		protected readonly static int UpHash = -703542574; public bool Up{ get{ return animator.GetBool(UpHash); } set{ animator.SetBool(UpHash, value); }}
 		protected readonly static int DownHash = -1127399675; public bool Down{ get{ return animator.GetBool(DownHash); } set{ animator.SetBool(DownHash, value); }}
 		protected readonly static int AttackHash = 1080829965; public bool Attack{ get{ return animator.GetBool(AttackHash); } set{ animator.SetBool(AttackHash, value); }}
+		protected readonly static int JumpAttackedHash = 217795252; public bool JumpAttacked{ get{ return animator.GetBool(JumpAttackedHash); } set{ animator.SetBool(JumpAttackedHash, value); }}
+		protected readonly static int DashAttackedHash = -711295023; public int DashAttacked{ get{ return animator.GetInteger(DashAttackedHash); } set{ animator.SetInteger(DashAttackedHash, value); }}
 		protected readonly static int Attack2Hash = 1680125592; public bool Attack2{ get{ return animator.GetBool(Attack2Hash); } set{ animator.SetBool(Attack2Hash, value); }}
 		protected readonly static int InStateTimerHash = 448632149; public float InStateTimer{ get{ return animator.GetFloat(InStateTimerHash); } set{ animator.SetFloat(InStateTimerHash, value); }}
 		protected readonly static int OnGroundHash = 1602690925; public bool OnGround{ get{ return animator.GetBool(OnGroundHash); } set{ animator.SetBool(OnGroundHash, value); }}
 		protected readonly static int HasDoubleJumpedHash = 1478635177; public bool HasDoubleJumped{ get{ return animator.GetBool(HasDoubleJumpedHash); } set{ animator.SetBool(HasDoubleJumpedHash, value); }}
-		protected readonly static int DashAttackedHash = -711295023; public int DashAttacked{ get{ return animator.GetInteger(DashAttackedHash); } set{ animator.SetInteger(DashAttackedHash, value); }}
 		protected readonly static int HealthHash = -915003867; public int Health{ get{ return animator.GetInteger(HealthHash); } set{ animator.SetInteger(HealthHash, value); }}
 		protected readonly static int JumpZeroFlgHash = 524162288; public bool JumpZeroFlg{ get{ return animator.GetBool(JumpZeroFlgHash); } set{ animator.SetBool(JumpZeroFlgHash, value); }}
 		protected readonly static int HitHash = 1654612129; public bool Hit{ get{ return animator.GetBool(HitHash); } set{ animator.SetBool(HitHash, value); }}
-		protected readonly static int JumpAttackedHash = 217795252; public bool JumpAttacked{ get{ return animator.GetBool(JumpAttackedHash); } set{ animator.SetBool(JumpAttackedHash, value); }}
 		protected readonly static int JumpRollingedHash = 1864325393; public int JumpRollinged{ get{ return animator.GetInteger(JumpRollingedHash); } set{ animator.SetInteger(JumpRollingedHash, value); }}
 		public static readonly int BaseLayer_Hit_Hit = 1431649142;
 		public static readonly int BaseLayer_Hit_HitDeath = -628763217;

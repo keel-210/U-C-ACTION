@@ -8,6 +8,7 @@ public class StateIdle : PlayerAnimState
     {
         base.DirectionFix();
         playeranimator.JumpRollinged = 0;
+        PC.ChangeLayer2Default();
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

@@ -9,6 +9,8 @@ public class StateShoot : PlayerAnimState
     Vector3 InitPos;
     [SerializeField]
     float InitTime;
+    [SerializeField]
+    int spendMagic;
     bool HasShot;
     public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -18,8 +20,9 @@ public class StateShoot : PlayerAnimState
     {
         if(InitTime < playeranimator.InStateTimer && !HasShot)
         {
-            Instantiate(PC.PP.Bullet, animator.transform.position + InitPos, Quaternion.identity);
+            //Instantiate(PC.PP.Bullet, animator.transform.position + InitPos, Quaternion.identity);
             HasShot = true;
+            PC.magic -= spendMagic;
         }
         rb.velocity = Vector2.zero;
     }

@@ -2,43 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlagWaverController : EnemyController, IDamasable, IShield
+public class FlagWaverController : EnemyController, IDamasable
 {
-    [SerializeField]
-    int DefaultShield;
     [SerializeField]
     GameObject HitObj;
 
-    public int Shield { get; set; }
     Animator anim;
 
     void Awake()
     {
-        Shield = DefaultShield;
         anim = GetComponent<Animator>();
     }
 
     public override void TakeDamage(int damage)
     {
-        if (anim.GetBool("Down"))
-        {
-            health -= damage;
-        }
-        else
-        {
-            if (Shield > 0)
-            {
-                Shield -= damage;
-                if (Shield < 0)
-                {
-                    anim.SetBool("Down", true);
-                }
-            }
-            else
-            {
-                Shield = DefaultShield;
-            }
-        }
+        health -= damage;
     }
     public override void Hit(Vector2 velo)
     {
@@ -46,10 +24,7 @@ public class FlagWaverController : EnemyController, IDamasable, IShield
     }
     public void GroundHit()
     {
-
-    }
-    public void Recovery()
-    {
-
+        Instantiate(HitObj, new Vector3(2 + transform.position.x, 0, 0), Quaternion.identity);
+        Instantiate(HitObj, new Vector3(-2 + transform.position.x, 0, 0), Quaternion.identity * Quaternion.Euler(0, 180, 0));
     }
 }

@@ -16,9 +16,9 @@ namespace AnimatorParameter
 		protected readonly static int HitHash = 1654612129; public bool Hit{ get{ return animator.GetBool(HitHash); } set{ animator.SetBool(HitHash, value); }}
 		protected readonly static int OnGroundHash = 1602690925; public bool OnGround{ get{ return animator.GetBool(OnGroundHash); } set{ animator.SetBool(OnGroundHash, value); }}
 		public static readonly int Base_Layer_Hit = -1005802792;
-		public static readonly int Base_Layer_Death = -1546996312;
 		public static readonly int Base_Layer_Attack = 1130333774;
 		public static readonly int Base_Layer_Destroy = 1545706595;
+		public static readonly int Base_Layer_Idle = 1432961145;
 		public static readonly int Alpha_Idle = -593007129;
 		public static readonly int Alpha_Damage = -1085633226;
 

@@ -9,23 +9,39 @@ public class HealthSlider : MonoBehaviour
     GameObject obj;
     [SerializeField]
     bool IsPlayer;
+    [SerializeField]
+    float MaxValue, MinValue;
 
     Health health;
     Slider slider;
 
-	void Start ()
+    void Start()
     {
+        slider = GetComponent<Slider>();
         if (IsPlayer)
         {
             obj = GameObject.FindGameObjectWithTag("Player");
+            health = obj.GetComponent<Health>();
+            slider.maxValue = 1000;
         }
-        slider = GetComponent<Slider>();
-        health = obj.GetComponent<Health>();
-        slider.maxValue = health.health;
-        slider.value = health.health;
-	}
-	void Update()
+        else
+        {
+            health = obj.GetComponent<Health>();
+            slider.maxValue = MaxValue - MinValue;
+        }
+        slider.value = health.health - MinValue;
+    }
+
+    void Update()
     {
-        slider.value = health.health;
+        if (health != null && IsPlayer)
+        {
+            obj = GameObject.FindGameObjectWithTag("Player");
+            slider = GetComponent<Slider>();
+            health = obj.GetComponent<Health>();
+            slider.maxValue = 1000;
+            slider.value = health.health;
+        }
+        slider.value = health.health - MinValue;
     }
 }

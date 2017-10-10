@@ -15,6 +15,10 @@ public class MagicSlider : MonoBehaviour
     }
     void Update()
     {
+        if (PP)
+        {
+            PP = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        }
         slider.value = PP.magic;
     }
 }

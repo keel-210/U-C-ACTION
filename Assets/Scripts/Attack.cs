@@ -11,9 +11,11 @@ public class Attack : MonoBehaviour
     Vector2 HitVelo;
     [SerializeField]
     Object Effect;
+    [SerializeField]
+    bool DefaultActive;
     private void Start()
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(DefaultActive);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
