@@ -36,4 +36,9 @@ public static class MonoBehaviorExtentsion
         action();
     }
 
+    public static IEnumerator DelayMethodByRealtime(this MonoBehaviour mono, float waitTime, Action action)
+    {
+        yield return new WaitForSecondsRealtime(waitTime);
+        action();
+    }
 }

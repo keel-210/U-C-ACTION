@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class LichController : EnemyController, IDamasable
 {
-    [SerializeField]
-    GameObject shot1, shot2, groundHitShot, ChaserShot;
-
     Animator anim;
 
     void Awake()
@@ -21,21 +18,5 @@ public class LichController : EnemyController, IDamasable
     public override void Hit(Vector2 velo)
     {
         anim.SetBool("Hit", true);
-    }
-    public void Shoot1()
-    {
-
-    }
-    public void Shoot2()
-    {
-
-    }
-    public void GroundHit()
-    {
-
-    }
-    public void Chaser()
-    {
-
     }
 }

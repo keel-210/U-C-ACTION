@@ -6,6 +6,7 @@ public class StateHit : PlayerAnimState
 {
     public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        rb.velocity = Vector2.zero;
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

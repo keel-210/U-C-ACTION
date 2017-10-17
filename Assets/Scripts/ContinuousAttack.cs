@@ -17,6 +17,13 @@ public class ContinuousAttack : MonoBehaviour
         col = GetComponent<Collider2D>();
         gameObject.SetActive(false);
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (Effect)
+        {
+            Instantiate(Effect, transform.position, transform.rotation);
+        }
+    }
     private void OnTriggerStay2D(Collider2D collision)
     {
         var d = collision.GetComponentInParent<IDamasable>();
@@ -37,10 +44,6 @@ public class ContinuousAttack : MonoBehaviour
                 dir = -1;
             }
             h.Hit(new Vector2(HitVelo.x * dir, HitVelo.y));
-        }
-        if (Effect)
-        {
-            Instantiate(Effect, transform.position, transform.rotation);
         }
     }
 }

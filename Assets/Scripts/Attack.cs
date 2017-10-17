@@ -13,6 +13,9 @@ public class Attack : MonoBehaviour
     Object Effect;
     [SerializeField]
     bool DefaultActive;
+
+    bool HitStopped;
+
     private void Start()
     {
         gameObject.SetActive(DefaultActive);
@@ -23,6 +26,12 @@ public class Attack : MonoBehaviour
         if (d != null)
         {
             d.TakeDamage(Damage);
+            if(collision.tag == "Enemy")
+            {
+                HitStopped = true;
+                Time.timeScale = 0;
+                iTween.ShakePosition(Camera.main.gameObject, iTween.Hash("x", 0.1f, "y", 0, "time", 0.1f));
+            }
         }
         var h = collision.GetComponentInParent<IHitable>();
         if(h != null)
@@ -41,6 +50,17 @@ public class Attack : MonoBehaviour
         if (Effect)
         {
             Instantiate(Effect, transform.position, transform.rotation);
+        }
+    }
+    private void Update()
+    {
+        if(HitStopped)
+        {
+            StartCoroutine(this.DelayMethodByRealtime(0.1f, () =>
+            {
+                Time.timeScale = 1;
+                HitStopped = false;
+            }));
         }
     }
 }
