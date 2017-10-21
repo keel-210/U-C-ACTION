@@ -18,21 +18,14 @@ public class PlayerChaser : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        StartCoroutine(this.DelayMethod(20f, () => { DestroyBullet(); }));
+        Destroy(gameObject, 20f);
         rb.velocity = transform.up * BulletSpeed;
     }
-
     private void Update()
     {
-        rb.velocity = Vector3.Lerp(rb.velocity, (transform.position - Target.position).normalized * BulletSpeed, 0.1f);
+        rb.velocity = Vector3.MoveTowards(transform.position, Target.position, BulletSpeed);
     }
-
     void OnTriggerEnter2D(Collider2D obj)
-    {
-        DestroyBullet();
-    }
-
-    void DestroyBullet()
     {
         Destroy(gameObject);
     }

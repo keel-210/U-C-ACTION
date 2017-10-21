@@ -40,11 +40,11 @@ public class EneStateSustainDistance : EnemyAnimState
         }
         if (DisableX)
         {
-            dif = new Vector2(0, dif.y);
+            realOffset = new Vector2(0, realOffset.y);
         }
         if (DisableY)
         {
-            dif = new Vector2(dif.x, 0);
+            realOffset = new Vector2(realOffset.x, 0);
         }
         if (Mathf.Abs(dif.x) < 0.1f && Mathf.Abs(dif.y) < 0.1f)
         {

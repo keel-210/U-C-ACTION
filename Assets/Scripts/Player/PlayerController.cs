@@ -150,6 +150,10 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter, IAtta
     {
         Colliders[ACEnum].SetActive(false);
     }
+    private void OnBecameInvisible()
+    {
+        
+    }
 }
 public enum PlayerAttackColliders
 { Attack1, Attack2, Attack3, JumpAttack, RollingAttack, FallAttack, AirAttack, DashAttack, SquatAttack, AirAttack2 }

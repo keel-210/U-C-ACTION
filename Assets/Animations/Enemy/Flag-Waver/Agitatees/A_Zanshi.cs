@@ -19,8 +19,10 @@ namespace AnimatorParameter
 		public static readonly int Base_Layer_Attack = 1130333774;
 		public static readonly int Base_Layer_Destroy = 1545706595;
 		public static readonly int Base_Layer_Idle = 1432961145;
+		public static readonly int Base_Layer_Disable = 1865307977;
 		public static readonly int Alpha_Idle = -593007129;
 		public static readonly int Alpha_Damage = -1085633226;
+		public static readonly int Alpha_Init = -956875642;
 
 	}
 }

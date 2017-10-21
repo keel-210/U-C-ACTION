@@ -30,7 +30,7 @@ public class Attack : MonoBehaviour
             {
                 HitStopped = true;
                 Time.timeScale = 0;
-                iTween.ShakePosition(Camera.main.gameObject, iTween.Hash("x", 0.1f, "y", 0, "time", 0.1f));
+                iTween.ShakePosition(Camera.main.gameObject, iTween.Hash("x", 0.1f, "y", 0.1f, "time", 0.2f));
             }
         }
         var h = collision.GetComponentInParent<IHitable>();
