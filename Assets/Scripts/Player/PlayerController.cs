@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter, IAtta
     public BoxCollider2D HitCollider;
 
     public PlayerParamater PP { get; set; }
+    public bool HitStopped { get; set; }
 
     PlayerEffectEmitter PEE;
     string GroundTag = "Ground";
@@ -153,6 +154,17 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter, IAtta
     private void OnBecameInvisible()
     {
         
+    }
+    private void Update()
+    {
+        if (HitStopped)
+        {
+            StartCoroutine(this.DelayMethodByRealtime(0.1f, () =>
+            {
+                Time.timeScale = 1;
+                HitStopped = false;
+            }));
+        }
     }
 }
 public enum PlayerAttackColliders

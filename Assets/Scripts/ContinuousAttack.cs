@@ -10,26 +10,27 @@ public class ContinuousAttack : MonoBehaviour
     Vector2 HitVelo;
     [SerializeField]
     Object Effect;
+    [SerializeField]
+    bool DefaultActive;
+
     Collider2D col;
     float Timer;
     private void Start()
     {
         col = GetComponent<Collider2D>();
-        gameObject.SetActive(false);
+        gameObject.SetActive(DefaultActive);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (Effect)
-        {
-            Instantiate(Effect, transform.position, transform.rotation);
-        }
-    }
+    
     private void OnTriggerStay2D(Collider2D collision)
     {
         var d = collision.GetComponentInParent<IDamasable>();
         if (d != null)
         {
             d.TakeDamage(Damage);
+            if (Effect)
+            {
+                Instantiate(Effect, transform.position, transform.rotation);
+            }
         }
         var h = collision.GetComponent<IHitable>();
         if (h != null)

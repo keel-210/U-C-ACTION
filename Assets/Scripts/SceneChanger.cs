@@ -10,6 +10,9 @@ public class SceneChanger : MonoBehaviour
 
     public void Change()
     {
-        SceneManager.LoadScene(NextScene);
+        FindObjectOfType<Fade>().FadeIn(2f,()=> 
+        {
+            SceneManager.LoadScene(NextScene);
+        });
     }
 }

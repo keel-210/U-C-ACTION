@@ -68,6 +68,17 @@ public class WaveManager : MonoBehaviour
         public Vector2 Pos;
         public GameObject Wave;
     }
+#if UNITY_EDITOR
+    void OnDrawGizmosSelected()
+    {
+        foreach (WaveAndPos w in Waves)
+        {
+            UnityEditor.Handles.DrawSolidRectangleWithOutline(
+                new Vector3[] { w.Pos + new Vector2(10, 10), w.Pos + new Vector2(-10, 10), w.Pos + new Vector2(-10, 0), w.Pos + new Vector2(10, 0) },
+                new Color(0, 1, 0, 0.2f), new Color(1, 1, 1, 0.2f));
+        }
+    }
+#endif
 }
 
 public class WaveAndPosAttribute : PropertyAttribute { }
@@ -100,6 +111,16 @@ public class WaveAndPosDrawer : Editor
         serializedObject.Update();
         RL.DoLayoutList();
         serializedObject.ApplyModifiedProperties();
+    }
+    private void OnSceneGUI()
+    {
+        WaveManager component = target as WaveManager;
+        List<WaveManager.WaveAndPos> wp = component.Waves;
+        for (int i = 0; i < wp.Count; i++)
+        {
+            wp[i].Pos = Handles.PositionHandle(wp[i].Pos, Quaternion.identity);
+            wp[i].Wave.transform.position = wp[i].Pos;
+        }
     }
 }
 

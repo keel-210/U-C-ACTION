@@ -29,7 +29,7 @@ public class EneStateSustainDistance : EnemyAnimState
         }
         if (!DontFixDirection)
         {
-            if (realOffset.x > 0)
+            if (dif.x < 0)
             {
                 EC.Direction2Opposite();
             }

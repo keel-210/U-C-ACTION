@@ -23,7 +23,8 @@ public class PlayerChaser : MonoBehaviour
     }
     private void Update()
     {
-        rb.velocity = Vector3.MoveTowards(transform.position, Target.position, BulletSpeed);
+        transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.FromToRotation(Vector3.up, Target.position - transform.position),0.05f);
+        rb.velocity = transform.up * BulletSpeed;
     }
     void OnTriggerEnter2D(Collider2D obj)
     {

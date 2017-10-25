@@ -34,6 +34,15 @@ public class EnemyListEmitter : MonoBehaviour
             }
         }
     }
+#if UNITY_EDITOR
+    void OnDrawGizmosSelected()
+    {
+        Vector2 w = new Vector2(transform.position.x, transform.position.y);
+        Handles.DrawSolidRectangleWithOutline(
+                new Vector3[] { w + new Vector2(10, 10), w + new Vector2(-10, 10), w + new Vector2(-10, 0), w + new Vector2(10, 0) },
+                new Color(0, 1, 0, 0.2f), new Color(1, 1, 1, 0.2f));
+    }
+#endif
 }
 [CanEditMultipleObjects]
 [CustomEditor(typeof(EnemyListEmitter))]
@@ -63,4 +72,14 @@ public class EnemyListDrawer : Editor
         RL.DoLayoutList();
         serializedObject.ApplyModifiedProperties();
     }
+    private void OnSceneGUI()
+    {
+        var component = target as EnemyListEmitter;
+        List<PrefabListEmitter.EmitPrefab> l = component.list;
+        for (int i = 0; i < l.Count; i++)
+        {
+            l[i].Pos = Handles.FreeMoveHandle(l[i].Pos + component.transform.position, Quaternion.identity, 0.25f, Vector3.forward, Handles.RectangleCap) - component.transform.position;
+        }
+    }
+    
 }

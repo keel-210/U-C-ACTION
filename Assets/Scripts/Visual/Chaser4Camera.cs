@@ -10,10 +10,15 @@ public class Chaser4Camera : MonoBehaviour
     List<Area> areas = new List<Area>();
     [SerializeField]
     Transform Target;
+    [SerializeField]
+    bool YStrict;
+
     public bool Fixed;
+
     Vector2 FixedPos;
     Area NowArea;
     CameraFixType fixType;
+
     private void Start()
     {
         NowArea = areas[0];
@@ -25,12 +30,26 @@ public class Chaser4Camera : MonoBehaviour
         foreach (Area a in areas)
         {
             Vector2 pos = NextPos;
-            if (a.Mins.x <= pos.x && pos.x <= a.Maxs.x)
+            if (!YStrict)
             {
-                NowArea = a;
+                if (a.Mins.x <= pos.x && pos.x <= a.Maxs.x)
+                {
+                    NowArea = a;
+                    if (a.Mins.y <= pos.y && pos.y <= a.Maxs.y)
+                    {
+                        NowArea = a;
+                    }
+                }
+            }
+            else
+            {
                 if (a.Mins.y <= pos.y && pos.y <= a.Maxs.y)
                 {
                     NowArea = a;
+                    if (a.Mins.x <= pos.x && pos.x <= a.Maxs.x)
+                    {
+                        NowArea = a;
+                    }
                 }
             }
         }
@@ -78,7 +97,7 @@ public class Chaser4Camera : MonoBehaviour
         public Vector2 Maxs, Mins;
     }
 #if UNITY_EDITOR
-    void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
         foreach (Area a in areas)
         {
@@ -89,7 +108,7 @@ public class Chaser4Camera : MonoBehaviour
             // カメラの移動範囲のGizmoを描画
             UnityEditor.Handles.DrawSolidRectangleWithOutline(
                 new Vector3[] { a.Maxs, maxXMinY, a.Mins, minXMaxY },
-                new Color(0, 0, 1, 0.2f), Color.white);
+                new Color(0, 0, 1, 0.2f), new Color(1, 1, 1, 0.2f));
 
 
             // カメラの描画する縦幅・横幅を取得
@@ -102,7 +121,7 @@ public class Chaser4Camera : MonoBehaviour
             UnityEditor.Handles.DrawSolidRectangleWithOutline(new Vector3[]{
                 a.Maxs + (Vector2)cameraMaxXMaxY, maxXMinY + cameraMaxXMinY,
                 a.Mins - (Vector2)cameraMaxXMaxY, minXMaxY - cameraMaxXMinY
-            }, new Color(0, 0, 0, 0), Color.white);
+            }, new Color(0, 0, 0, 0), new Color(1,1,1,0.2f));
         }
     }
 #endif

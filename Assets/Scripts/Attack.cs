@@ -28,7 +28,8 @@ public class Attack : MonoBehaviour
             d.TakeDamage(Damage);
             if(collision.tag == "Enemy")
             {
-                HitStopped = true;
+                PlayerController pc = transform.root.GetComponent<PlayerController>();
+                pc.HitStopped = true;
                 Time.timeScale = 0;
                 iTween.ShakePosition(Camera.main.gameObject, iTween.Hash("x", 0.1f, "y", 0.1f, "time", 0.2f));
             }
@@ -50,17 +51,6 @@ public class Attack : MonoBehaviour
         if (Effect)
         {
             Instantiate(Effect, transform.position, transform.rotation);
-        }
-    }
-    private void Update()
-    {
-        if(HitStopped)
-        {
-            StartCoroutine(this.DelayMethodByRealtime(0.1f, () =>
-            {
-                Time.timeScale = 1;
-                HitStopped = false;
-            }));
         }
     }
 }

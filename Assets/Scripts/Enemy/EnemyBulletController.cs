@@ -13,7 +13,7 @@ public class EnemyBulletController : MonoBehaviour
     Rigidbody2D rb;
     Transform Target;
 
-    void Start()
+    void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
         if (!(Target = GameObject.FindGameObjectWithTag("Player").transform))
@@ -27,7 +27,10 @@ public class EnemyBulletController : MonoBehaviour
 
         StartCoroutine(this.DelayMethod(20f, () => { DestroyBullet(); }));
 
-        rb.velocity = transform.up * BulletSpeed;
+        if (rb)
+        {
+            rb.velocity = transform.up * BulletSpeed;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D obj)

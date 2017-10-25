@@ -8,7 +8,6 @@ public class StateInAir : PlayerAnimState
     public override void Enter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         playeranimator.JumpZeroFlg = false;
-        PC.ChangeLayer2Default();
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

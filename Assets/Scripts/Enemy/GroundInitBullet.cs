@@ -8,6 +8,8 @@ public class GroundInitBullet : MonoBehaviour
     GameObject Obj;
     [SerializeField]
     float BulletSpeed;
+    [SerializeField]
+    Vector3 rot;
 
     void Start()
     {
@@ -20,7 +22,7 @@ public class GroundInitBullet : MonoBehaviour
     {
         if (obj.tag == "Ground" && Obj)
         {
-            Instantiate(Obj, transform.position, Quaternion.identity);
+            Instantiate(Obj, transform.position, Quaternion.Euler(rot));
         }
         Destroy(this.gameObject);
     }

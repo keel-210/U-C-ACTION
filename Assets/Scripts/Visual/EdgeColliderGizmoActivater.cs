@@ -5,14 +5,18 @@ using UnityEngine;
 public class EdgeColliderGizmoActivater : MonoBehaviour
 {
     [SerializeField]
-    Color color;
+    Color color = new Color(0, 0, 0, 1);
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        foreach(EdgeCollider2D e in GetComponents<EdgeCollider2D>())
+        foreach (EdgeCollider2D e in GetComponents<EdgeCollider2D>())
         {
             UnityEditor.Handles.color = color;
-            UnityEditor.Handles.DrawLine(e.points[0], e.points[1]);
+            for (int i = 0; i < e.pointCount - 1; i++)
+            {
+                UnityEditor.Handles.DrawLine(e.points[i], e.points[i + 1]);
+            }
+
         }
     }
 #endif
