@@ -15,6 +15,7 @@ public class StateJumpAttack : PlayerAnimState
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         rb.velocity = velo;
+        PC.ChangeLayer2Squat();
     }
     public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

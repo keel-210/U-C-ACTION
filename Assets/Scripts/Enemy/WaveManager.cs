@@ -41,10 +41,10 @@ public class WaveManager : MonoBehaviour
             }
             else
             {
-                if (player.transform.position.y > wp.Pos.y)
+                if (player.transform.position.y >= wp.Pos.y && Mathf.Abs( player.position.x -wp.Pos.x) < 1f)
                 {
                     if (!wp.Wave.activeInHierarchy)
-                        Camera.main.GetComponent<Chaser4Camera>().Fix(wp.Pos,CameraFixType.yFix);
+                        Camera.main.GetComponent<Chaser4Camera>().Fix(wp.Pos,CameraFixType.xyFix);
                     wp.Wave.SetActive(true);
                     NowWave = wp.Wave.transform;
                     NowEmitter = wp.Wave.GetComponent<EnemyListEmitter>();

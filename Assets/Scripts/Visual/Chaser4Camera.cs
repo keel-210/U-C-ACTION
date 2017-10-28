@@ -69,22 +69,23 @@ public class Chaser4Camera : MonoBehaviour
                     transform.position = new Vector3(NextPosX.x, y, NextPosX.z);
                     break;
                 case CameraFixType.yFix:
-                    Vector3 NextPosY = Vector3.MoveTowards(transform.position, new Vector3(Target.position.x, FixedPos.y, transform.position.z), ChaserRatio);
+                    Vector3 NextPosY = Vector3.MoveTowards(transform.position, new Vector3(Target.position.x, FixedPos.y+5, transform.position.z), ChaserRatio);
                     float x = Mathf.Clamp(NextPosY.x, NowArea.Mins.x, NowArea.Maxs.x);
                     transform.position = new Vector3(x, NextPosY.y, NextPosY.z);
                     break;
                 case CameraFixType.xyFix:
-                    Vector3 NextPosXY = Vector3.MoveTowards(transform.position, new Vector3(Target.position.x, FixedPos.y, transform.position.z), ChaserRatio);
+                    Vector3 NextPosXY = Vector3.MoveTowards(transform.position, new Vector3(FixedPos.x, FixedPos.y+5, transform.position.z), ChaserRatio);
                     transform.position = NextPosXY;
                     break;
             }
         }
     }
 
-    public void Fix(Vector2 CamPos, CameraFixType fixType)
+    public void Fix(Vector2 CamPos, CameraFixType fixt)
     {
         Fixed = true;
         FixedPos = CamPos;
+        fixType = fixt;
     }
     public void UnFix()
     {

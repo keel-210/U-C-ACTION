@@ -9,6 +9,7 @@ public class ReStarter : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
+            FindObjectOfType<PlayerController>().ReStarter();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 	}

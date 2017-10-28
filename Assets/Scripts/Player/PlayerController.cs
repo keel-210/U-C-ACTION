@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter, IAtta
 
     [SerializeField]
     public BoxCollider2D HitCollider;
+    [SerializeField]
+    Object BloodEffect;
 
     public PlayerParamater PP { get; set; }
     public bool HitStopped { get; set; }
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter, IAtta
         {
             Destroy(this.gameObject);
         }
+        SceneManager.sceneLoaded += OnSceneLoded;
     }
     //Costractor
     void Start()
@@ -64,9 +67,9 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter, IAtta
         PEE = GetComponent<PlayerEffectEmitter>();
         DontDestroyOnLoad(this.gameObject);
     }
-    private void OnLevelWasLoaded(int level)
+    void OnSceneLoded(Scene loadedScene, LoadSceneMode mode)
     {
-        transform.position = new Vector3(0, 0.1f, 0);
+        instance.transform.position = new Vector3(0, 0.1f, 0);
     }
     //4OnGround
     private void OnCollisionEnter2D(Collision2D collision)
@@ -127,6 +130,7 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter, IAtta
     public void TakeDamage(int damage)
     {
         health -= damage;
+        Instantiate(BloodEffect, transform.position, Quaternion.identity);
         if (health <= 0)
         {
             GameObject.FindObjectOfType<MenuController>().GameOver();
@@ -150,6 +154,11 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter, IAtta
     public void ColliderUnable(int ACEnum)
     {
         Colliders[ACEnum].SetActive(false);
+    }
+    public void ReStarter()
+    {
+        health = 1000;
+        magic = 1000;
     }
     private void OnBecameInvisible()
     {

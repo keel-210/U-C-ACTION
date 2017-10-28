@@ -30,8 +30,12 @@ public class Attack : MonoBehaviour
             {
                 PlayerController pc = transform.root.GetComponent<PlayerController>();
                 pc.HitStopped = true;
-                Time.timeScale = 0;
-                iTween.ShakePosition(Camera.main.gameObject, iTween.Hash("x", 0.1f, "y", 0.1f, "time", 0.2f));
+                Time.timeScale = 0.1f;
+                iTween.ShakePosition(Camera.main.gameObject, iTween.Hash("x", 0.05f, "y", 0.0f, "time", 0.2f));
+            }
+            if (Effect)
+            {
+                Instantiate(Effect, transform.position, transform.rotation);
             }
         }
         var h = collision.GetComponentInParent<IHitable>();
@@ -47,10 +51,6 @@ public class Attack : MonoBehaviour
                 dir = -1;
             }
             h.Hit(new Vector2(HitVelo.x*dir,HitVelo.y));
-        }
-        if (Effect)
-        {
-            Instantiate(Effect, transform.position, transform.rotation);
         }
     }
 }

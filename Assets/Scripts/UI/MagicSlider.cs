@@ -12,12 +12,14 @@ public class MagicSlider : MonoBehaviour
     {
         PP = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         slider = GetComponent<Slider>();
+        slider.maxValue = 1000;
     }
     void Update()
     {
         if (PP)
         {
             PP = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            slider.maxValue = 1000;
         }
         slider.value = PP.magic;
     }
