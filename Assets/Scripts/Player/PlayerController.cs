@@ -10,14 +10,34 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter, IAtta
     public int health
     {
         get { return _health; }
-        set { _health = value; }
+        set
+        {
+            if (value <= 1000)
+            {
+                _health = value;
+            }
+            else
+            {
+                _health = 1000;
+            }
+        }
     }
     [SerializeField]
     private int _magic;
     public int magic
     {
         get { return _magic; }
-        set { _magic = value; }
+        set
+        {
+            if (value <= 1000)
+            {
+                _magic = value;
+            }
+            else
+            {
+                _magic = 1000;
+            }
+        }
     }
 
     [SerializeField]
@@ -130,7 +150,10 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter, IAtta
     public void TakeDamage(int damage)
     {
         health -= damage;
-        Instantiate(BloodEffect, transform.position, Quaternion.identity);
+        if (damage > 0)
+        {
+            Instantiate(BloodEffect, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        }
         if (health <= 0)
         {
             GameObject.FindObjectOfType<MenuController>().GameOver();
@@ -162,7 +185,7 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter, IAtta
     }
     private void OnBecameInvisible()
     {
-        
+
     }
     private void Update()
     {

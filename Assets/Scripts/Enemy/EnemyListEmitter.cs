@@ -44,6 +44,7 @@ public class EnemyListEmitter : MonoBehaviour
     }
 #endif
 }
+#if UNITY_EDITOR
 [CanEditMultipleObjects]
 [CustomEditor(typeof(EnemyListEmitter))]
 public class EnemyListDrawer : Editor
@@ -83,3 +84,4 @@ public class EnemyListDrawer : Editor
     }
     
 }
+#endif

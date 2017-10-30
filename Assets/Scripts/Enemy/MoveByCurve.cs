@@ -8,6 +8,8 @@ public class MoveByCurve : MonoBehaviour
     AnimationCurve velo;
     [SerializeField]
     float Speed;
+    [SerializeField]
+    bool Move2YAxis;
 
     Rigidbody2D rb;
     float timeOffset;
@@ -21,6 +23,13 @@ public class MoveByCurve : MonoBehaviour
     }
     void FixedUpdate ()
     {
-        rb.velocity = transform.right * Speed * velo.Evaluate(Time.time - timeOffset);
-	}
+        if (!Move2YAxis)
+        {
+            rb.velocity = transform.right * Speed * velo.Evaluate(Time.time - timeOffset);
+        }
+        else
+        {
+            rb.velocity = transform.up * Speed * velo.Evaluate(Time.time - timeOffset);
+        }
+    }
 }

@@ -17,7 +17,7 @@ public class ShotShell : MonoBehaviour
             x.gameObject.SetActive(false);
             x.gameObject.GetComponent<MoveByCurve>().enabled = false;
             x.rotation = Quaternion.Euler(0, 0, i + (50 * Random.value));
-            x.localPosition = 2 * x.right;
+            x.localPosition = 2 * x.up;
             i += 360/transform.childCount;
         }
     }

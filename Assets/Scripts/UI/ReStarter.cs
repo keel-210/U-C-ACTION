@@ -10,6 +10,7 @@ public class ReStarter : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             FindObjectOfType<PlayerController>().ReStarter();
+            Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 	}

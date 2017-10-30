@@ -6,7 +6,7 @@ public class PlayerChaser : MonoBehaviour
 {
 
     [SerializeField]
-    float BulletSpeed;
+    float BulletSpeed,ratio;
 
     Rigidbody2D rb;
     Transform Target;
@@ -23,7 +23,7 @@ public class PlayerChaser : MonoBehaviour
     }
     private void Update()
     {
-        transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.FromToRotation(Vector3.up, Target.position - transform.position),0.05f);
+        transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.FromToRotation(Vector3.up, Target.position - transform.position),ratio);
         rb.velocity = transform.up * BulletSpeed;
     }
     void OnTriggerEnter2D(Collider2D obj)

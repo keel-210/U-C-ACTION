@@ -10,9 +10,13 @@ public class SceneChanger : MonoBehaviour
 
     public void Change()
     {
-        FindObjectOfType<Fade>().FadeIn(2f,()=> 
+        Fade[] fadeArray = FindObjectsOfType<Fade>();
+        foreach(Fade f in fadeArray)
         {
-            SceneManager.LoadScene(NextScene);
-        });
+            f.FadeIn(2f, () =>
+            {
+                SceneManager.LoadScene(NextScene);
+            });
+        }
     }
 }

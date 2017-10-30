@@ -52,7 +52,6 @@ public class FadeImage : UnityEngine.UI.Graphic , IFade
 	{
 		enabled = true;
 		material.SetFloat ("_Range", 1 - range);
-
 		if (range <= 0) {
 			this.enabled = false;
 		}
@@ -63,7 +62,6 @@ public class FadeImage : UnityEngine.UI.Graphic , IFade
 		material.SetTexture ("_MaskTex", texture);
 		material.SetColor ("_Color", color);
 	}
-
 	#if UNITY_EDITOR
 	protected override void OnValidate ()
 	{

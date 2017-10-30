@@ -14,6 +14,9 @@ public abstract class EnemyController : MonoBehaviour,IAttackColliders, IDamasab
         get { return _Colliders; }
         set { _Colliders = value; }
     }
+    [SerializeField]
+    public Object Drop;
+
     protected Rigidbody2D rb;
     public bool IsHit = false,OnGround = true;
 
