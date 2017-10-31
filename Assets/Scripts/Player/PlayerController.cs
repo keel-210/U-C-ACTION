@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter, IAtta
 
     public PlayerParamater PP { get; set; }
     public bool HitStopped { get; set; }
+    public GameObject WaitEffect;
 
     PlayerEffectEmitter PEE;
     string GroundTag = "Ground";

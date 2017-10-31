@@ -12,9 +12,14 @@ public class StateSquatWait : PlayerAnimState
     }
     public override void Execute(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if(animator.GetFloat("InStateTimer") > 0.5f)
+        {
+            PC.WaitEffect.SetActive(true);
+        }
     }
     public override void Exit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PC.ChangeLayer2Default();
+        PC.WaitEffect.SetActive(false);
     }
 }

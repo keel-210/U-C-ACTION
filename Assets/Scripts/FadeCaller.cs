@@ -9,7 +9,6 @@ public class FadeCaller : MonoBehaviour
 	void Start ()
     {
         Time.timeScale = 1;
-        Time.timeScale = 0;
         var list = FindObjectsOfType<Fade>();
         foreach(Fade f in list)
         {
