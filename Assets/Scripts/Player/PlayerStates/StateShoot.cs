@@ -24,7 +24,7 @@ public class StateShoot : PlayerAnimState
     {
         if(InitTime < playeranimator.InStateTimer && !HasShot)
         {
-            Instantiate(PC.PP.Bullet, animator.transform.position + InitPos, animator.rootRotation);
+            Instantiate(PC.PP.Bullet, animator.transform.position + playeranimator.Direction * InitPos, animator.rootRotation);
             HasShot = true;
             PC.magic -= spendMagic;
         }

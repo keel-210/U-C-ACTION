@@ -10,10 +10,6 @@ public class HPDrop : MonoBehaviour
     Object effect;
 
     bool HasCollided;
-    private void Start()
-    {
-        GetComponent<PlayerChaser>().enabled = false;
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         collision.transform.root.GetComponent<PlayerController>().health += health;

@@ -9,7 +9,7 @@ public class EneStateDeath : EnemyAnimState
         EC.ChangeLayer2Default();
         if (EC.Drop)
         {
-            int DropNum = Random.Range(0, 3);
+            int DropNum = Random.Range(EC.DropMin, EC.DropMax);
             for (int i = 0; i < DropNum; i++)
             {
                 Instantiate(EC.Drop, tra.position + new Vector3(Random.value, Random.value, 0), Quaternion.identity);

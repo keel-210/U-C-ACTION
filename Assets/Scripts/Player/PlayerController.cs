@@ -90,7 +90,10 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter, IAtta
     }
     void OnSceneLoded(Scene loadedScene, LoadSceneMode mode)
     {
-        instance.transform.position = new Vector3(0, 0.1f, 0);
+        if (instance)
+        {
+            instance.transform.position = new Vector3(0, 0.1f, 0);
+        }
     }
     //4OnGround
     private void OnCollisionEnter2D(Collision2D collision)
@@ -153,7 +156,7 @@ public class PlayerController : MonoBehaviour, IDamasable, IEffectEmitter, IAtta
         health -= damage;
         if (damage > 0)
         {
-            Instantiate(BloodEffect, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+            Instantiate(BloodEffect, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
         }
         if (health <= 0)
         {

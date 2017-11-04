@@ -7,8 +7,9 @@ public class Back2Title : MonoBehaviour
 {
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetAxisRaw("Jump")>0)
         {
+            Destroy(GameObject.FindGameObjectWithTag("Player"));
             SceneManager.LoadScene(0);
         }
 	}

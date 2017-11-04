@@ -7,7 +7,7 @@ public class ReStarter : MonoBehaviour
 {
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetAxisRaw("Fire3") > 0)
         {
             FindObjectOfType<PlayerController>().ReStarter();
             Time.timeScale = 1;

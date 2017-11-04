@@ -16,6 +16,7 @@ public abstract class EnemyController : MonoBehaviour,IAttackColliders, IDamasab
     }
     [SerializeField]
     public Object Drop;
+    public int DropMin, DropMax;
 
     protected Rigidbody2D rb;
     public bool IsHit = false,OnGround = true;
